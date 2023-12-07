@@ -9,7 +9,7 @@ export default function Signup() {
       <div>
         <Navbar />
       </div>
-      <div className="bg-base-500 flex items-center justify-center">
+      <div className="bg-base-500 flex items-center justify-center mt-4 mb-4">
         <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
           <Login />
         </div>
