@@ -73,8 +73,14 @@ export class DistributorController {
     if (!(await this.profileservice.isProfileUnique(license_number, phone_number, email))) {
       throw new UnprocessableEntityException('Profile with the same license number, phone, or email already exists.');
     }
-    const result = await this.profileservice.addDistributor(disInfo);
-    return result;
+    try{
+      const result = await this.profileservice.addDistributor(disInfo);
+      return result;
+    }
+    catch(e){
+      return e;
+    }
+    
   }
 
   @Get('checkDisVerification')

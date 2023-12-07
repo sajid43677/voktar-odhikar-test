@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function Register() {
   const router = useRouter();
@@ -18,10 +19,30 @@ export default function Register() {
   const { register, handleSubmit, formState, watch, reset } = form;
   const { errors, isDirty } = formState;
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log("Form submitted", data);
-    if (watch("Role") === "Distributor") router.push("Distributor/distributor");
-    reset();
+    const userData = {
+      name: data.Name,
+      email: data.Email,
+      address: data.region,
+      phone_number: data.phone,
+      role: "Distributor",
+      password: data.Password,
+      region: data.region,
+      license_number: data.LicenseNum,
+    };
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/users/distributor/addDistributor/",
+        userData
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+      //console.log(res);
+    }
+
+    //reset();
   };
 
   console.log({ isDirty });
