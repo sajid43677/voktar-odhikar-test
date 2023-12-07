@@ -9,7 +9,7 @@ export default function Register() {
   const form = useForm({
     defaultValues: {
       Name: "",
-      Email: "john@email.com",
+      Email: "",
       Password: "",
       region: "",
       phone: "",
@@ -26,7 +26,7 @@ export default function Register() {
       email: data.Email,
       address: data.region,
       phone_number: data.phone,
-      role: "Distributor",
+      role: data.Role,
       password: data.Password,
       region: data.region,
       license_number: data.LicenseNum,
@@ -59,13 +59,17 @@ export default function Register() {
   return (
     <>
       <div className="">
-        <h2 className="text-xl font-semibold mb-6 text-center">Sign Up</h2>
+        <h2 className="text-xl font-semibold mb-6 text-center text-slate-900">
+          Sign Up
+        </h2>
         <div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label className="form-control w-full max-w-xs">
                 <div className="label">
-                  <span className="label-text text-lg">What is your name?</span>
+                  <span className="label-text text-lg text-slate-900">
+                    What is your name?
+                  </span>
                 </div>
                 <input
                   className="input input-bordered w-full max-w-xs bg-inherit input-sm"
@@ -84,7 +88,9 @@ export default function Register() {
             <div>
               <label className="form-control w-full max-w-xs">
                 <div className="label">
-                  <span className="label-text text-lg">Email</span>
+                  <span className="label-text text-lg text-slate-900">
+                    Email
+                  </span>
                 </div>
                 <input
                   className="input input-bordered w-full max-w-xs bg-inherit input-sm"
@@ -121,7 +127,9 @@ export default function Register() {
             <div>
               <label className="form-control w-full max-w-xs">
                 <div className="label">
-                  <span className="label-text text-lg">Password</span>
+                  <span className="label-text text-lg text-slate-900">
+                    Password
+                  </span>
                 </div>
                 <input
                   className="input input-bordered w-full max-w-xs bg-inherit input-sm"
@@ -176,7 +184,9 @@ export default function Register() {
             <div>
               <label className="form-control w-full max-w-xs">
                 <div className="label">
-                  <span className="label-text text-lg">Confirm Password</span>
+                  <span className="label-text text-lg text-slate-900">
+                    Confirm Password
+                  </span>
                 </div>
                 <input
                   className="input input-bordered w-full max-w-xs bg-inherit input-sm"
@@ -204,7 +214,9 @@ export default function Register() {
             <div>
               <label className="form-control w-full max-w-xs">
                 <div className="label">
-                  <span className="label-text text-lg">Region</span>
+                  <span className="label-text text-lg text-slate-900">
+                    Region
+                  </span>
                 </div>
                 <select
                   className="select select-bordered w-full max-w-xs bg-inherit select-sm"
@@ -239,7 +251,9 @@ export default function Register() {
             <div>
               <label className="form-control w-full max-w-xs">
                 <div className="label">
-                  <span className="label-text text-lg">Phone</span>
+                  <span className="label-text text-lg text-slate-900">
+                    Phone
+                  </span>
                 </div>
                 <input
                   className="input input-bordered w-full max-w-xs bg-inherit input-sm"
@@ -296,7 +310,9 @@ export default function Register() {
             <div>
               <label className="form-control w-full max-w-xs">
                 <div className="label">
-                  <span className="label-text text-lg">License Number</span>
+                  <span className="label-text text-lg text-slate-900">
+                    License Number
+                  </span>
                 </div>
                 <input
                   className="input input-bordered w-full max-w-xs bg-inherit input-sm"
@@ -322,7 +338,9 @@ export default function Register() {
             <div>
               <label className="form-control w-full max-w-xs">
                 <div className="label">
-                  <span className="label-text text-lg">Role</span>
+                  <span className="label-text text-lg text-slate-900">
+                    Role
+                  </span>
                 </div>
                 <div className="form-control">
                   <label className="label cursor-pointer">
@@ -331,6 +349,7 @@ export default function Register() {
                       className="radio checked:bg-base"
                       type="radio"
                       id="admin"
+                      value="Admin"
                       {...register("Role", {
                         required: "Select a role",
                       })}
@@ -345,6 +364,7 @@ export default function Register() {
                       className="radio checked:bg-blue-300"
                       type="radio"
                       id="distributor"
+                      value="Distributor"
                       {...register("Role", {
                         required: "Select a role",
                       })}
@@ -359,6 +379,7 @@ export default function Register() {
                       className="radio checked:bg-blue-300"
                       type="radio"
                       id="industry"
+                      value="Industry"
                       {...register("Role", {
                         required: "Select a role",
                       })}

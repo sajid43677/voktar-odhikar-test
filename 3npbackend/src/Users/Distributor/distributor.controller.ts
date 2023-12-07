@@ -73,15 +73,8 @@ export class DistributorController {
     if (!(await this.profileservice.isProfileUnique(license_number, phone_number, email))) {
       throw new UnprocessableEntityException('Profile with the same license number, phone, or email already exists.');
     }
-    try{
-      const result = await this.profileservice.addDistributor(disInfo);
-      return result;
-    }
-    catch(e){
-      console.log(e);
-      return e;
-    }
-    
+    const result = await this.profileservice.addDistributor(disInfo);
+    return result;
   }
 
   @Get('checkDisVerification')
@@ -171,7 +164,6 @@ export class DistributorController {
       try {
         
         const productver = await this.distributorservice.addDistributorProductInfo(pro,session)
-        console.log(productver)
         if(productver){
           
           return productver;
@@ -654,6 +646,18 @@ async deleteStockProduct(@Body() product: DeleteProduct, @Session() session): Pr
   {
     return { message: 'You are a Unauthorized User' };
 
+  }
+}
+
+@Get('logout')
+@UseGuards(SessionGuardDis)
+async logout(@Session() session) {
+  if (session.user) {
+    
+    session.destroy();
+    return { message: 'Logout successful' };
+  } else {
+    return { message: 'No user in the session' };
   }
 }
 
