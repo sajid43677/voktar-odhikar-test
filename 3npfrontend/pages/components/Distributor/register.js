@@ -12,6 +12,7 @@ export default function Register() {
       Password: "",
       region: "",
       phone: "",
+      LicenseNum: "",
     },
   });
   const { register, handleSubmit, formState, watch, reset } = form;
@@ -242,7 +243,7 @@ export default function Register() {
                 </div>
               </label>
             </div>
-            <div>
+            {/* <div>
               <label className="form-control w-full max-w-xs">
                 <div className="label">
                   <span className="label-text text-lg">License</span>
@@ -265,6 +266,32 @@ export default function Register() {
                 <div className="label">
                   <span className="label-text-alt">
                     {errors.license?.message}
+                  </span>
+                </div>
+              </label>
+            </div> */}
+            <div>
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text text-lg">License Number</span>
+                </div>
+                <input
+                  className="input input-bordered w-full max-w-xs bg-inherit input-sm"
+                  placeholder="Type here"
+                  type="text"
+                  id="LicenseNum"
+                  {...register("LicenseNum", {
+                    required: "Name cannot be empty",
+                    pattern: {
+                      value: /^AUTH-\d{12}$/,
+                      message:
+                        'License number must start with "AUTH-" followed by 12 digits',
+                    },
+                  })}
+                />
+                <div className="label">
+                  <span className="label-text-alt">
+                    {errors.LicenseNum?.message}
                   </span>
                 </div>
               </label>

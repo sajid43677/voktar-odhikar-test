@@ -10,7 +10,7 @@ name:string;
 
 
 
-@IsNotEmpty({ message: 'Please enter a valid role' }) 
+@IsNotEmpty({ message: 'Please enter a valid email' }) 
 @IsEmail() 
 @IsString()
 email:string;
