@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-export default function Login() {
+export default function Register() {
   const router = useRouter();
   const form = useForm({
     defaultValues: {

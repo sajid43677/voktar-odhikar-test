@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import Header from "./components/Distributor/header";
-import Login from "./components/Distributor/login";
+import Login from "./components/Distributor/register";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 
