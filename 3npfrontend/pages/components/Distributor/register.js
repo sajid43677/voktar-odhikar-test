@@ -353,7 +353,6 @@ export default function Register() {
                       {...register("Role", {
                         required: "Select a role",
                       })}
-                      checked
                     />
                   </label>
                 </div>
@@ -368,7 +367,6 @@ export default function Register() {
                       {...register("Role", {
                         required: "Select a role",
                       })}
-                      checked
                     />
                   </label>
                 </div>
@@ -383,7 +381,6 @@ export default function Register() {
                       {...register("Role", {
                         required: "Select a role",
                       })}
-                      checked
                     />
                   </label>
                 </div>
