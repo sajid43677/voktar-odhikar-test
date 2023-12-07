@@ -34,112 +34,151 @@ export default function Login() {
 
   return (
     <>
-      <div>
-        <p>Registration</p>
+      <div className="">
+        <h2 className="text-xl font-semibold mb-6 text-center">Sign Up</h2>
         <div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-              <label htmlFor="Name">Name</label>
-              <input
-                type="text"
-                id="Name"
-                {...register("Name", {
-                  required: "Name cannot be empty",
-                })}
-              />
-              <p>{errors.Name?.message}</p>
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text">What is your name?</span>
+                </div>
+                <input
+                  className="input input-bordered w-full max-w-xs bg-inherit"
+                  placeholder="Type here"
+                  type="text"
+                  id="Name"
+                  {...register("Name", {
+                    required: "Name cannot be empty",
+                  })}
+                />
+                <div className="label">
+                  <span className="label-text-alt">{errors.Name?.message}</span>
+                </div>
+              </label>
             </div>
             <div>
-              <label htmlFor="Email">Email</label>
-              <input
-                type="text"
-                id="Email"
-                {...register("Email", {
-                  validate: {
-                    notEmpty: (fd) => {
-                      return fd !== "" || "Field Cannot Be empty";
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text">Email</span>
+                </div>
+                <input
+                  className="input input-bordered w-full max-w-xs bg-inherit"
+                  placeholder="Type here"
+                  type="text"
+                  id="Email"
+                  {...register("Email", {
+                    validate: {
+                      notEmpty: (fd) => {
+                        return fd !== "" || "Field Cannot Be empty";
+                      },
+                      notDefault: (fd) => {
+                        return (
+                          fd !== "john@email.com" ||
+                          "Default email cannot be used"
+                        );
+                      },
+                      emailPattarn: (fd) => {
+                        return (
+                          /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(fd) ||
+                          "Invalid email"
+                        );
+                      },
                     },
-                    notDefault: (fd) => {
-                      return (
-                        fd !== "john@email.com" ||
-                        "Default email cannot be used"
-                      );
-                    },
-                    emailPattarn: (fd) => {
-                      return (
-                        /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(fd) ||
-                        "Invalid email"
-                      );
-                    },
-                  },
-                })}
-              />
-              <p>{errors.Email?.message}</p>
+                  })}
+                />
+                <div className="label">
+                  <span className="label-text-alt">
+                    {errors.Email?.message}
+                  </span>
+                </div>
+              </label>
             </div>
             <div>
-              <label htmlFor="Password">Password</label>
-              <input
-                type="password"
-                id="Password"
-                {...register("Password", {
-                  validate: {
-                    notEmpty: (fd) => {
-                      return fd !== "" || "Field Cannot Be empty";
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text">Password</span>
+                </div>
+                <input
+                  className="input input-bordered w-full max-w-xs bg-inherit"
+                  placeholder="Type here"
+                  type="password"
+                  id="Password"
+                  {...register("Password", {
+                    validate: {
+                      notEmpty: (fd) => {
+                        return fd !== "" || "Field Cannot Be empty";
+                      },
+                      capLetterCheck: (fd) => {
+                        return (
+                          /[A-Z]/.test(fd) ||
+                          "Password must contain a capital letter"
+                        );
+                      },
+                      letterCheck: (fd) => {
+                        return (
+                          /[a-z]/.test(fd) ||
+                          "Password must contain a lowercase letter"
+                        );
+                      },
+                      digitCheck: (fd) => {
+                        return (
+                          /\d/.test(fd) ||
+                          "Password must contain a digit letter"
+                        );
+                      },
+                      specialCharCheck: (fd) => {
+                        return (
+                          /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(fd) ||
+                          "Password must contain a special character"
+                        );
+                      },
+                      minLength: (fd) => {
+                        return (
+                          fd.length >= 8 ||
+                          "Password must contain atleast 8 character"
+                        );
+                      },
                     },
-                    capLetterCheck: (fd) => {
-                      return (
-                        /[A-Z]/.test(fd) ||
-                        "Password must contain a capital letter"
-                      );
-                    },
-                    letterCheck: (fd) => {
-                      return (
-                        /[a-z]/.test(fd) ||
-                        "Password must contain a lowercase letter"
-                      );
-                    },
-                    digitCheck: (fd) => {
-                      return (
-                        /\d/.test(fd) || "Password must contain a digit letter"
-                      );
-                    },
-                    specialCharCheck: (fd) => {
-                      return (
-                        /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(fd) ||
-                        "Password must contain a special character"
-                      );
-                    },
-                    minLength: (fd) => {
-                      return (
-                        fd.length >= 8 ||
-                        "Password must contain atleast 8 character"
-                      );
-                    },
-                  },
-                })}
-              />
-              <p>{errors.Password?.message}</p>
+                  })}
+                />
+                <div className="label">
+                  <span className="label-text-alt">
+                    {errors.Password?.message}
+                  </span>
+                </div>
+              </label>
             </div>
             <div>
-              <label htmlFor="ConfirmPass">Confirm Password</label>
-              <input
-                type="password"
-                id="ConfirmPass"
-                {...register("ConfirmPass", {
-                  validate: {
-                    checkGivenPass: (fd) => {
-                      return (
-                        watch("Password") === fd ||
-                        "Do not match the given password"
-                      );
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text">Confirm Password</span>
+                </div>
+                <input
+                  className="input input-bordered w-full max-w-xs bg-inherit"
+                  placeholder="Type here"
+                  type="password"
+                  id="ConfirmPass"
+                  {...register("ConfirmPass", {
+                    validate: {
+                      checkGivenPass: (fd) => {
+                        return (
+                          watch("Password") === fd ||
+                          "Do not match the given password"
+                        );
+                      },
                     },
-                  },
-                })}
-              />
-              <p>{errors.ConfirmPass?.message}</p>
+                  })}
+                />
+                <div className="label">
+                  <span className="label-text-alt">
+                    {errors.ConfirmPass?.message}
+                  </span>
+                </div>
+              </label>
             </div>
             <div>
-              <label htmlFor="region">Region</label>
+              {/* <label htmlFor="region">Region</label>
 
               <select
                 name="region"
@@ -158,10 +197,10 @@ export default function Login() {
                 <option value="Sylhet">Sylhet</option>
                 <option value="Barisal">Barisal</option>
               </select>
-              <p>{errors.region?.message}</p>
+              <p>{errors.region?.message}</p> */}
             </div>
             <div>
-              <label htmlFor="phone">Phone</label>
+              {/* <label htmlFor="phone">Phone</label>
               <input
                 type="text"
                 id="phone"
@@ -178,10 +217,10 @@ export default function Login() {
                   },
                 })}
               />
-              <p>{errors.phone?.message}</p>
+              <p>{errors.phone?.message}</p> */}
             </div>
             <div>
-              <label htmlFor="license">License</label>
+              {/* <label htmlFor="license">License</label>
               <input
                 type="file"
                 id="license"
@@ -196,10 +235,10 @@ export default function Login() {
                   },
                 })}
               />
-              <p>{errors.license?.message}</p>
+              <p>{errors.license?.message}</p> */}
             </div>
             <div>
-              <label htmlFor="Role">Role</label>
+              {/* <label htmlFor="Role">Role</label>
               <br />
               <input
                 type="radio"
@@ -227,9 +266,15 @@ export default function Login() {
                 })}
               />
               <label htmlFor="vokta">Vokta</label>
-              <p>{errors.Role?.message}</p>
+              <p>{errors.Role?.message}</p> */}
             </div>
-            <div>{isDirty && <button>Submit</button>}</div>
+            <div>
+              {isDirty && (
+                <button className="btn btn-outline mx-auto w-full">
+                  Sign Up
+                </button>
+              )}
+            </div>
           </form>
         </div>
       </div>
