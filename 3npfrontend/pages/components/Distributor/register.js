@@ -124,14 +124,14 @@ export default function Register() {
                       },
                       digitCheck: (fd) => {
                         return (
-                          /\d/.test(fd) ||
-                          "Password must contain a digit letter"
+                          /^(.*\d){2,}.*$/.test(fd) ||
+                          "Password must contain atleast 2 numbers"
                         );
                       },
                       specialCharCheck: (fd) => {
                         return (
-                          /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(fd) ||
-                          "Password must contain a special character"
+                          /^(.*[^a-zA-Z0-9]){2,}.*$/.test(fd) ||
+                          "Password must contain atleast 2 special character"
                         );
                       },
                       minLength: (fd) => {
