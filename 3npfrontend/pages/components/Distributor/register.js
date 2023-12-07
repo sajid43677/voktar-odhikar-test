@@ -34,7 +34,7 @@ export default function Register() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/users/distributor/addDistributor/",
+        process.env.NEXT_PUBLIC_API_End + "distributor/addDistributor/",
         userData
       );
       console.log(res);
