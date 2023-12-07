@@ -31,6 +31,7 @@ export default function Register() {
       region: data.region,
       license_number: data.LicenseNum,
     };
+
     try {
       const res = await axios.post(
         "http://localhost:3000/users/distributor/addDistributor/",
