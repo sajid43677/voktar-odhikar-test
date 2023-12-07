@@ -189,12 +189,17 @@ export default function Login() {
                   {...register("region", {
                     validate: {
                       notEmpty: (fd) => {
+                        return fd !== "Select Your Region" || "Select a region";
+                      },
+                      notEmpty2: (fd) => {
                         return fd !== "" || "Select a region";
                       },
                     },
                   })}
                 >
-                  <option value=""></option>
+                  <option disabled selected>
+                    Select Your Region
+                  </option>
                   <option value="Dhaka">Dhaka</option>
                   <option value="Chittagong">Chittagong</option>
                   <option value="Sylhet">Sylhet</option>
