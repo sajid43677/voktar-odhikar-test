@@ -29,7 +29,7 @@ export default function Distributor() {
           Successfully logged in as <strong>Distributor</strong>
         </AlertDis>
       )} */}
-      <Sidebar items={listinfos} textSize="15" />
+      <Sidebar items={listinfos} textSize="30" />
       <Footer />
     </>
   );
