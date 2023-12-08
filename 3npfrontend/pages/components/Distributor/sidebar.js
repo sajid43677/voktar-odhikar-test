@@ -1,4 +1,5 @@
 import React from "react";
+import Products from "./products";
 
 export default function Sidebar(props) {
   const listselect = (fd) => {
@@ -8,8 +9,9 @@ export default function Sidebar(props) {
     <>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center">
+        <div className="drawer-content flex flex-col">
           {/* Page content here */}
+          <Products />
         </div>
         <div className="drawer-side">
           <label
