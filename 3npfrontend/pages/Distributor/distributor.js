@@ -6,6 +6,9 @@ import { useState } from "react";
 import ListInfo from "../components/Distributor/listInfo";
 import AlertDis from "../components/Distributor/alert";
 import MyCardDis from "../components/Distributor/cardDis";
+import Sidebar from "../components/Distributor/sidebar";
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
 
 export default function Distributor() {
   const listinfos = [
@@ -20,15 +23,14 @@ export default function Distributor() {
 
   return (
     <>
-      <Header title="DistributorHome" />
-      {alertVisible && (
+      <Navbar />
+      {/* {alertVisible && (
         <AlertDis alertType="success" onClose={() => setAlertVisible(false)}>
           Successfully logged in as <strong>Distributor</strong>
         </AlertDis>
-      )}
-      <h1>Wellcome to distributor site</h1>
-      <br />
-      <MyCardDis items={listinfos} textSize="22" />
+      )} */}
+      <Sidebar items={listinfos} textSize="15" />
+      <Footer />
     </>
   );
 }
