@@ -14,7 +14,7 @@ export default function Sidebar(props) {
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           {/* Page content here */}
-          <Products />
+          {selectedIndex === 0 && <Products />}
         </div>
         <div className="drawer-side">
           <label
