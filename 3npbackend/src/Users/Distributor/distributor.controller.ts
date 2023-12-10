@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Query, Post, Put,Delete, ValidationPipe, UsePipes, UseInterceptors, UploadedFile, ParseIntPipe, Res, Session, NotFoundException, UnauthorizedException, UnprocessableEntityException, UseGuards, Patch } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MulterError, diskStorage } from "multer";
-import { Login, ProfileDTO, UpdateDisDTO, UpdateNameDTO, UpdatePhoneDTO, UpdateRegionDisDTO, UpdatepasswordDTO } from 'src/Models/All Profile/profile.dto';
+import { Login, ProfileDTO, ProfileDTODis, UpdateDisDTO, UpdateNameDTO, UpdatePhoneDTO, UpdateRegionDisDTO, UpdatepasswordDTO } from 'src/Models/All Profile/profile.dto';
 import { ProfileEntity } from 'src/Models/All Profile/profile.entity';
 import { ProfileService } from 'src/Models/All Profile/profile.service';
 import { VerificationDTO, VerificationDisDTO } from 'src/Models/Verification/verification.dto';
@@ -67,14 +67,23 @@ export class DistributorController {
 
   @Post('addDistributor')
   @UsePipes(new ValidationPipe())
-  async addDis(@Body() disInfo: ProfileDTO) {
+  async addDis(@Body() disInfo: ProfileDTODis) {
     const { license_number, phone_number, email } = disInfo;
+    const sendRes = {
+      success: "False",
+      message: "",
+      data: {},
+    };
 
     if (!(await this.profileservice.isProfileUnique(license_number, phone_number, email))) {
-      throw new UnprocessableEntityException('Profile with the same license number, phone, or email already exists.');
+
+      sendRes.message = 'Profile with the same license number, phone, or email already exists.';
+      return sendRes;
     }
     const result = await this.profileservice.addDistributor(disInfo);
-    return result;
+    if(result.message !== "") sendRes.message=result.message;
+    else sendRes.data=result;
+    return sendRes;
   }
 
   @Get('checkDisVerification')

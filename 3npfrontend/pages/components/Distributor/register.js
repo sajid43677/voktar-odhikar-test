@@ -20,7 +20,6 @@ export default function Register() {
   const { errors, isDirty } = formState;
 
   const onSubmit = async (data) => {
-    console.log("Form submitted", data);
     const userData = {
       name: data.Name,
       email: data.Email,
@@ -30,15 +29,18 @@ export default function Register() {
       password: data.Password,
       region: data.region,
       license_number: data.LicenseNum,
+      message: "",
     };
+    console.log("Form submitted", userData);
 
     try {
       const res = await axios.post(
         process.env.NEXT_PUBLIC_API_End + "distributor/addDistributor/",
         userData
       );
-      console.log(res);
-      alert("profile created");
+      console.log(res.data);
+      if (res.data.message === "") alert("profile created");
+      else alert(res.data.message);
     } catch (error) {
       console.log(error);
       //console.log(res);

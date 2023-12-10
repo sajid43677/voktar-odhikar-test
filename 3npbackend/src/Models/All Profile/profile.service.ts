@@ -2,7 +2,7 @@ import { Injectable, Session } from '@nestjs/common';
 import { Not, Repository } from 'typeorm';
 import { ProfileEntity } from './profile.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ProfileDTO, UpdateAdminDTO, UpdateDisDTO, UpdateIndsutryPhoneDTO, UpdateIndustryDTO, UpdateNameDTO, UpdatePhoneDTO, UpdateRegionDisDTO, UpdateUserDTO, UpdateUserPhoneDTO, UpdatepasswordDTO } from './profile.dto';
+import { ProfileDTO, ProfileDTODis, UpdateAdminDTO, UpdateDisDTO, UpdateIndsutryPhoneDTO, UpdateIndustryDTO, UpdateNameDTO, UpdatePhoneDTO, UpdateRegionDisDTO, UpdateUserDTO, UpdateUserPhoneDTO, UpdatepasswordDTO } from './profile.dto';
 import * as bcrypt from 'bcrypt';
 import { NoDistributorFound, NoIndustryFound, PhonenumberExistsforUpdate } from './profile.error';
 import { ProfiledoesnotExistsError } from '../Verification/verification.errors';
@@ -225,18 +225,39 @@ async updatephonenumber(phone_number:UpdatePhoneDTO,id:number): Promise<ProfileE
     })
   }
 
-  async addDistributor(disInfo:ProfileDTO):Promise<ProfileEntity>
+  async addDistributor(disInfo:ProfileDTO):Promise<ProfileDTODis | {message:string}>
   {
     const { license_number, phone_number, email } = disInfo;
   
     if (!(await this.isProfileUnique(license_number, phone_number, email))) {
-      throw new Error('Profile with the same license number, phone, or email already exists.');
+      return {message:'Profile with the same license number, phone, or email already exists'};
     }
     const password = disInfo.password;
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
     disInfo.password = hashedPassword;
-    return this.profileRepo.save(disInfo);
+    const disi = this.profileRepo.save(disInfo);
+    const disin = {
+      name:(await disi).name,
+    email:(await disi).email,
+  
+    address:(await disi).address,
+    
+    license_number:(await disi).license_number,
+    
+    phone_number:(await disi).phone_number,
+    role: (await disi).role,
+    
+    
+    password:(await disi).password,
+    
+    region: (await disi).region,
+
+    message: "",
+    }
+    return disin;
+
+
   }
 
   async updateDisInfo(ProfileInfo:UpdateDisDTO,id:number):Promise<ProfileEntity>
