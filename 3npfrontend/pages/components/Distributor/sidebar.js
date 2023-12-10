@@ -2,9 +2,52 @@ import React from "react";
 import Products from "./products";
 import { useState } from "react";
 import Profile from "./profile";
+import { useEffect } from "react";
+import axios from "axios";
 
 export default function Sidebar(props) {
   const [selectedIndex, setIndex] = useState(-1);
+  const [isProfile, setisProfile] = useState(false);
+  const [Profiles, setProfile] = useState();
+  const fetchPro = async () => {
+    const userData = {
+      email: props.email,
+      password: props.password,
+    };
+    console.log(userData);
+    try {
+      const res = await axios.post(
+        process.env.NEXT_PUBLIC_API_End + "distributor/login/",
+        userData
+      );
+
+      console.log(res);
+
+      //Check if the response status is successful (e.g., HTTP status code 200)
+      if (res.status >= 200 && res.status < 300) {
+        // You may want to store the authentication token or user information
+        // in the state or context
+        // For example:
+        // localStorage.setItem("token", res.data.token);
+        console.log(res);
+        setisProfile(true);
+        setProfile(res.data);
+        console.log(Profiles);
+        // Redirect the user to the appropriate page
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Wrong Email or Password");
+      // Handle other errors (e.g., network issues, server errors)
+      // You can show an error message, handle it in some way, etc.
+    }
+  };
+  useEffect(() => {
+    // Run the fetchPro function when the component mounts
+    console.log(props);
+    fetchPro();
+  }, []);
+
   console.log(props);
   const listselect = (fd, idx) => {
     setIndex(idx);
@@ -16,7 +59,9 @@ export default function Sidebar(props) {
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           {/* Page content here */}
-          {selectedIndex === 0 && <Products />}
+          {selectedIndex === 0 && (
+            <Products email={props.email} password={props.password} />
+          )}
           {selectedIndex === 5 && (
             <Profile email={props.email} password={props.password} />
           )}
@@ -62,8 +107,8 @@ export default function Sidebar(props) {
           `}
             >
               <div className="leading-4">
-                <h4 className="font-semibold">John Doe</h4>
-                <span className="text-xs text-gray-600">johndoe@gmail.com</span>
+                <h4 className="font-semibold">{isProfile && Profiles.name}</h4>
+                <span className="text-xs text-gray-600">{props.email}</span>
               </div>
             </div>
           </div>
