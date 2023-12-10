@@ -1,8 +1,11 @@
 import React from "react";
 import Products from "./products";
+import { useState } from "react";
 
 export default function Sidebar(props) {
-  const listselect = (fd) => {
+  const [selectedIndex, setIndex] = useState(-1);
+  const listselect = (fd, idx) => {
+    setIndex(idx);
     console.log(fd);
   };
   return (
@@ -35,8 +38,10 @@ export default function Sidebar(props) {
                 <li
                   key={index}
                   style={{ fontSize: `${props.textSize}px` }}
-                  className="hover:bg-slate-700 rounded-md"
-                  onClick={() => listselect(content)}
+                  className={`hover:bg-slate-700 rounded-md ${
+                    selectedIndex === index ? "bg-slate-600" : ""
+                  }`}
+                  onClick={() => listselect(content, index)}
                 >
                   <a>{content}</a>
                 </li>

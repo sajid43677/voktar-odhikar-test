@@ -12,12 +12,11 @@ import Footer from "../components/footer";
 
 export default function Distributor() {
   const listinfos = [
-    "Delivered Products",
-    "Request Products",
-    "Stored Products",
-    "Add Products",
-    "Redlist Status",
-    "Send Report",
+    "Show Products",
+    "Redlisted Industry",
+    "Delivered Produscts",
+    "Report",
+    "License Verification",
   ];
   const [alertVisible, setAlertVisible] = useState(true);
 
