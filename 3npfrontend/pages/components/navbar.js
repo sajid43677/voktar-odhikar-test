@@ -9,9 +9,13 @@ export default function Navbar() {
     setPopupMenuVisible(!isPopupMenuVisible);
   };
 
-  const signIn = () => {
+  const signUp = () => {
     // Add your sign-in logic here
     router.push("signup");
+  };
+  const signIn = () => {
+    // Add your sign-in logic here
+    router.push("signin");
   };
   const home = () => {
     // Add your sign-in logic here
@@ -33,10 +37,10 @@ export default function Navbar() {
                 <summary>Sign In</summary>
                 <ul className="p-2 bg-base-100 rounded-t-none z-10">
                   <li>
-                    <a onClick={signIn}>Sign Up</a>
+                    <a onClick={signUp}>Sign Up</a>
                   </li>
                   <li>
-                    <a>Sign In</a>
+                    <a onClick={signIn}>Sign In</a>
                   </li>
                 </ul>
               </details>

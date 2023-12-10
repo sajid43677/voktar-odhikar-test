@@ -1,9 +1,11 @@
 import React from "react";
 import Products from "./products";
 import { useState } from "react";
+import Profile from "./profile";
 
 export default function Sidebar(props) {
   const [selectedIndex, setIndex] = useState(-1);
+  console.log(props);
   const listselect = (fd, idx) => {
     setIndex(idx);
     console.log(fd);
@@ -15,6 +17,9 @@ export default function Sidebar(props) {
         <div className="drawer-content flex flex-col">
           {/* Page content here */}
           {selectedIndex === 0 && <Products />}
+          {selectedIndex === 5 && (
+            <Profile email={props.email} password={props.password} />
+          )}
         </div>
         <div className="drawer-side">
           <label

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Query, Post, Put,Delete, ValidationPipe, UsePipes, UseInterceptors, UploadedFile, ParseIntPipe, Res, Session, NotFoundException, UnauthorizedException, UnprocessableEntityException, UseGuards, Patch } from '@nestjs/common';
+import { Body, Controller, Get, Param, Query, Post, Put,Delete, ValidationPipe, UsePipes, UseInterceptors, UploadedFile, ParseIntPipe, Res, Session, NotFoundException, UnauthorizedException, UnprocessableEntityException, UseGuards, Patch, BadRequestException } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MulterError, diskStorage } from "multer";
 import { Login, ProfileDTO, ProfileDTODis, UpdateDisDTO, UpdateNameDTO, UpdatePhoneDTO, UpdateRegionDisDTO, UpdatepasswordDTO } from 'src/Models/All Profile/profile.dto';
@@ -669,6 +669,27 @@ async logout(@Session() session) {
     return { message: 'No user in the session' };
   }
 }
+
+@Get('viewprofile')
+  @UseGuards(SessionGuardDis)
+  async viewprofile(@Session() session): Promise<ProfileEntity>  {
+    const user = session.user;
+    if (user)
+    {
+      if (user.role === 'Distributor')
+      {
+        const res = await this.profileservice.viewprofile(user.uid);
+        return res;
+      }
+      else{
+        return user;
+      }
+    }
+    else{
+      throw new BadRequestException();
+    }
+ 
+  }
 
 
 

@@ -9,8 +9,9 @@ import MyCardDis from "../components/Distributor/cardDis";
 import Sidebar from "../components/Distributor/sidebar";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import { useRouter } from "next/router";
 
-export default function Distributor() {
+export default function Distributor(props) {
   const listinfos = [
     "Show Products",
     "Redlisted Industry",
@@ -20,6 +21,8 @@ export default function Distributor() {
     "profile",
   ];
   const [alertVisible, setAlertVisible] = useState(true);
+  const router = useRouter();
+  const customProps = JSON.parse(router.query.customProps || "{}");
 
   return (
     <>
@@ -29,7 +32,12 @@ export default function Distributor() {
           Successfully logged in as <strong>Distributor</strong>
         </AlertDis>
       )} */}
-      <Sidebar items={listinfos} textSize="30" />
+      <Sidebar
+        items={listinfos}
+        textSize="30"
+        email={customProps.email}
+        password={customProps.password}
+      />
       <Footer />
     </>
   );
