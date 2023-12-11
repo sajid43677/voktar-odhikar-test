@@ -15,7 +15,7 @@ export default function Distributor(props) {
   const listinfos = [
     "Show Products",
     "Redlisted Industry",
-    "Delivered Produscts",
+    "Delivered Products",
     "Report",
     "License Verification",
     "profile",

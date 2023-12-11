@@ -15,6 +15,7 @@ export default function Register() {
       phone: "",
       LicenseNum: "",
     },
+    mode: "all",
   });
   const { register, handleSubmit, formState, watch, reset } = form;
   const { errors, isDirty } = formState;
@@ -39,8 +40,10 @@ export default function Register() {
         userData
       );
       console.log(res.data);
-      if (res.data.message === "") alert("profile created");
-      else alert(res.data.message);
+      if (res.data.message === "") {
+        alert("profile created");
+        router.push("/");
+      } else alert(res.data.message);
     } catch (error) {
       console.log(error);
       //console.log(res);
@@ -239,7 +242,7 @@ export default function Register() {
                     Select Your Region
                   </option>
                   <option value="Dhaka">Dhaka</option>
-                  <option value="Chittagong">Chittagong</option>
+                  <option value="Chattogram">Chattogram</option>
                   <option value="Sylhet">Sylhet</option>
                   <option value="Barisal">Barisal</option>
                 </select>

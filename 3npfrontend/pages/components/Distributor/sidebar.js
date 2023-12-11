@@ -4,6 +4,8 @@ import { useState } from "react";
 import Profile from "./profile";
 import { useEffect } from "react";
 import axios from "axios";
+import RedlistedInd from "./redlisted";
+import Delquant from "./delquantity";
 
 export default function Sidebar(props) {
   const [selectedIndex, setIndex] = useState(-1);
@@ -65,6 +67,8 @@ export default function Sidebar(props) {
           {selectedIndex === 5 && (
             <Profile email={props.email} password={props.password} />
           )}
+          {selectedIndex === 1 && <RedlistedInd />}
+          {selectedIndex === 2 && <Delquant />}
         </div>
         <div className="drawer-side">
           <label

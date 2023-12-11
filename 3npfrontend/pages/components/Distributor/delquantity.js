@@ -3,14 +3,20 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 
-export default function Products() {
-  const headerColumns = ["", "Product", "Price", "Quantity Stored", ""];
-  const [products, setProducts] = useState({});
+export default function Delquant() {
+  const headerColumns = [
+    "",
+    "Distributor Name",
+    "Product Name",
+    "Delivered Quantity",
+    "",
+  ];
+  const [redlisted, setredlisted] = useState({});
   const [isProfile, setIsProfile] = useState(false);
   const fetchPro = async () => {
     try {
       const res = await axios.get(
-        process.env.NEXT_PUBLIC_API_End + "distributor/viewinventory/"
+        process.env.NEXT_PUBLIC_API_End + "distributor/deliveredquantity/"
       );
 
       console.log(res);
@@ -22,8 +28,8 @@ export default function Products() {
         // For example:
         // localStorage.setItem("token", res.data.token);
         console.log(res.data);
-        setProducts(res.data);
-        console.log(products);
+        setredlisted(res.data);
+        console.log(redlisted);
         setIsProfile(true);
       }
     } catch (error) {
@@ -55,26 +61,25 @@ export default function Products() {
             <tbody>
               {/* row 1 */}
               {isProfile &&
-                products.map((content, index) => (
+                redlisted.map((content, index) => (
                   <tr>
                     <th>{index + 1}</th>
                     <td>
                       <div className="flex items-center gap-3">
                         <div>
                           <div className="font-bold">
-                            {content.product_name}
-                          </div>
-                          <div className="text-sm opacity-50">
                             {content.distributor_name}
                           </div>
+                          <div className="text-sm opacity-50"></div>
                         </div>
                       </div>
                     </td>
                     <td>
-                      {content.distributor_price}
+                      {content.product_name}
+
                       <br />
                     </td>
-                    <td>{content.product_quantity}</td>
+                    <td>{content.delivered_quantity}</td>
                     <th>
                       <button className="btn btn-ghost btn-xs">details</button>
                     </th>

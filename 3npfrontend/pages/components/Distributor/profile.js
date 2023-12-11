@@ -48,9 +48,12 @@ export default function Profile(props) {
     <>
       <div>
         {isProfile && (
-          <ul>
+          <ul className="list-decimal justify-center items-center">
             <li>Username: {Profile.name}</li>
             <li>Email: {Profile.email}</li>
+            <li>License: {Profile.license_number}</li>
+            <li>Region: {Profile.region}</li>
+            <li>Role: {Profile.role}</li>
           </ul>
         )}
       </div>

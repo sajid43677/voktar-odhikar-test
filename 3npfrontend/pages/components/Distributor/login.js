@@ -11,10 +11,12 @@ export default function Login() {
       Email: "",
       Password: "",
     },
-  });
-  const { register, handleSubmit, formState } = form;
-  const { errors } = formState;
 
+    mode: "all",
+  });
+  const { register, handleSubmit, formState, reset, setValue } = form;
+  const { errors } = formState;
+  const [errch, seterrch] = useState("");
   const onSubmit = async (data) => {
     console.log("Form submitted", data);
     const userData = {
@@ -45,7 +47,15 @@ export default function Login() {
       }
     } catch (error) {
       console.log(error);
-      alert("Wrong Email or Password");
+      //alert("Wrong Email or Password");
+
+      seterrch(
+        Array.isArray(error.response.data.message)
+          ? error.response.data.message[0]
+          : error.response.data.message
+      );
+      console.log(errch);
+      reset();
       // Handle other errors (e.g., network issues, server errors)
       // You can show an error message, handle it in some way, etc.
     }
@@ -114,12 +124,15 @@ export default function Login() {
                       notEmpty: (fd) => {
                         return fd !== "" || "Field Cannot Be empty";
                       },
+                      checkData: (fd) => {
+                        return errch === "" || errch;
+                      },
                     },
                   })}
                 />
                 <div className="label">
                   <span className="label-text-alt">
-                    {errors.Password?.message}
+                    {errors.Password?.message || errch}
                   </span>
                 </div>
               </label>

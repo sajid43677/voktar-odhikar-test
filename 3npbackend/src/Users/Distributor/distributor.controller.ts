@@ -5,7 +5,7 @@ import { Login, ProfileDTO, ProfileDTODis, UpdateDisDTO, UpdateNameDTO, UpdatePh
 import { ProfileEntity } from 'src/Models/All Profile/profile.entity';
 import { ProfileService } from 'src/Models/All Profile/profile.service';
 import { VerificationDTO, VerificationDisDTO } from 'src/Models/Verification/verification.dto';
-import { NotanyRedlistedIndustry } from 'src/Models/Red Lists/redlist.error';
+import { NotanyRedlistedDributor, NotanyRedlistedIndustry } from 'src/Models/Red Lists/redlist.error';
 import { VerificationService } from 'src/Models/Verification/verification.service';
 import { LicenseNumberExistsError, ProfileAlreadyVerifiedError, ProfileMismatchError, ProfiledoesnotExistsError } from 'src/Models/Verification/verification.errors';
 import { SessionGuardDis } from './SessionDisGaurd.gaurd';
@@ -28,6 +28,7 @@ import { ReportandNoticeDisDTO, ReportandNoticePostDisDTO } from 'src/Models/Rep
 import { ReportandNoticeService } from 'src/Models/Report and Notice/reportandnotice.service';
 import { ReportandNoticeEntity } from 'src/Models/Report and Notice/reportandnotice.entity';
 import { DeleteResult } from 'typeorm';
+import { RedListEntity } from 'src/Models/Red Lists/redlist.entity';
 
 
 @Controller("users/distributor")
@@ -81,7 +82,7 @@ export class DistributorController {
       return sendRes;
     }
     const result = await this.profileservice.addDistributor(disInfo);
-    if(result.message !== "") sendRes.message=result.message;
+    if(result.message !== "") {sendRes.message=result.message;}
     else sendRes.data=result;
     return sendRes;
   }
@@ -201,15 +202,16 @@ export class DistributorController {
 
   @Get("viewinventory")
   @UsePipes(new ValidationPipe())
-  @UseGuards(SessionGuardDis)
+  //@UseGuards(SessionGuardDis)
   async viewinventory(@Session() session): Promise<DisProductEntity[] | { message: string }>{
-    const user = session.user;
+    //const user = session.user;
     
-    if(user.role==="Distributor")
+    //if(user.role==="Distributor")
     {
       try {
         
-        const products = await this.distributorservice.showDistributorProducts(session.user.name)
+        //const products = await this.distributorservice.showDistributorProducts(session.user.name)
+        const products = await this.distributorservice.showDistributorProducts("Shajid Kamal Joy")
         console.log(products)
         if(products){
           
@@ -227,7 +229,7 @@ export class DistributorController {
       }
   
     }
-    else
+   // else
     {
       return { message: 'You are a Unauthorized User' };
   
@@ -689,6 +691,70 @@ async logout(@Session() session) {
       throw new BadRequestException();
     }
  
+  }
+
+  @Get('redlisteddistributors')
+  //@UseGuards(SessionGuardDis)
+  async RedlisteddistributorIND(@Session() session): Promise<RedListEntity[]| { message: string }> { 
+    //const user = session.user;
+    //if(user.role=="Industry")
+    {
+      try {
+        const redlistEntity = await this.redlistservice.redlisteindustryIND();
+        if(redlistEntity.length !== 0)
+        {
+          return redlistEntity;
+        }
+      }
+      catch(error)
+      {
+        if (error instanceof NotanyRedlistedDributor){
+          return { message: 'There is not any RedListed Ditributor.' };
+        }
+      }
+  
+    }
+    //else
+    {
+      return { message: 'You are a Unauthorized User' };
+  
+    }
+  } 
+
+  @Get("deliveredquantity")
+  @UsePipes(new ValidationPipe())
+  //@UseGuards(SessionGuardDis)
+  async deliveredQuantity(@Session() session): Promise<DelquantityEntity[] | { message: string }>{
+    //const user = session.user;
+    
+    //if(user.role==="Distributor")
+    {
+      try {
+        
+        //const products = await this.distributorservice.showDistributorProducts(session.user.name)
+        const products = await this.delquantityservice.DeliveredQuantityDis();
+        console.log(products)
+        if(products){
+          
+          return products;
+        }
+        else{
+          return { message: 'No product in inventory'};
+        }
+      }
+      catch(error)
+      {
+        if (error instanceof productNotaAddedExist){
+          return { message: 'No product added' };
+        }
+      }
+  
+    }
+   // else
+    {
+      return { message: 'You are a Unauthorized User' };
+  
+    }
   }
 
 
