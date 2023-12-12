@@ -77,7 +77,9 @@ export default function Register() {
                   </span>
                 </div>
                 <input
-                  className="input input-bordered w-full max-w-xs bg-inherit input-sm"
+                  className={`input input-bordered w-full max-w-xs bg-inherit input-sm ${
+                    errors.Name?.message ? "input-warning" : ""
+                  }`}
                   placeholder="Type here"
                   type="text"
                   id="Name"
@@ -98,7 +100,9 @@ export default function Register() {
                   </span>
                 </div>
                 <input
-                  className="input input-bordered w-full max-w-xs bg-inherit input-sm"
+                  className={`input input-bordered w-full max-w-xs bg-inherit input-sm ${
+                    errors.Email?.message ? "input-warning" : ""
+                  }`}
                   placeholder="Type here"
                   type="text"
                   id="Email"
@@ -137,7 +141,9 @@ export default function Register() {
                   </span>
                 </div>
                 <input
-                  className="input input-bordered w-full max-w-xs bg-inherit input-sm"
+                  className={`input input-bordered w-full max-w-xs bg-inherit input-sm ${
+                    errors.Password?.message ? "input-warning" : ""
+                  }`}
                   placeholder="Type here"
                   type="password"
                   id="Password"
@@ -194,7 +200,9 @@ export default function Register() {
                   </span>
                 </div>
                 <input
-                  className="input input-bordered w-full max-w-xs bg-inherit input-sm"
+                  className={`input input-bordered w-full max-w-xs bg-inherit input-sm ${
+                    errors.ConfirmPass?.message ? "input-warning" : ""
+                  }`}
                   placeholder="Type here"
                   type="password"
                   id="ConfirmPass"
@@ -224,7 +232,9 @@ export default function Register() {
                   </span>
                 </div>
                 <select
-                  className="select select-bordered w-full max-w-xs bg-inherit select-sm"
+                  className={`input input-bordered w-full max-w-xs bg-inherit input-sm ${
+                    errors.region?.message ? "select-warning" : ""
+                  }`}
                   name="region"
                   id="region"
                   {...register("region", {
@@ -261,7 +271,9 @@ export default function Register() {
                   </span>
                 </div>
                 <input
-                  className="input input-bordered w-full max-w-xs bg-inherit input-sm"
+                  className={`input input-bordered w-full max-w-xs bg-inherit input-sm ${
+                    errors.phone?.message ? "input-warning" : ""
+                  }`}
                   placeholder="Type here"
                   type="text"
                   id="phone"
@@ -320,7 +332,9 @@ export default function Register() {
                   </span>
                 </div>
                 <input
-                  className="input input-bordered w-full max-w-xs bg-inherit input-sm"
+                  className={`input input-bordered w-full max-w-xs bg-inherit input-sm ${
+                    errors.LicenseNum?.message ? "input-warning" : ""
+                  }`}
                   placeholder="Type here"
                   type="text"
                   id="LicenseNum"

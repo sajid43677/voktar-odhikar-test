@@ -76,7 +76,9 @@ export default function Login() {
                   </span>
                 </div>
                 <input
-                  className="input input-bordered w-full max-w-xs bg-inherit input-sm"
+                  className={`input input-bordered w-full max-w-xs bg-inherit input-sm ${
+                    errors.Email?.message ? "input-warning" : ""
+                  }`}
                   placeholder="Type here"
                   type="text"
                   id="Email"
@@ -115,7 +117,9 @@ export default function Login() {
                   </span>
                 </div>
                 <input
-                  className="input input-bordered w-full max-w-xs bg-inherit input-sm"
+                  className={`input input-bordered w-full max-w-xs bg-inherit input-sm ${
+                    errors.Password?.message ? "input-warning" : ""
+                  }`}
                   placeholder="Type here"
                   type="password"
                   id="Password"
