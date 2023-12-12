@@ -19,6 +19,7 @@ export default function Register() {
   });
   const { register, handleSubmit, formState, watch, reset } = form;
   const { errors, isDirty } = formState;
+  const [errch, seterrch] = useState("");
 
   const onSubmit = async (data) => {
     const userData = {
@@ -46,6 +47,11 @@ export default function Register() {
       } else alert(res.data.message);
     } catch (error) {
       console.log(error);
+      seterrch(
+        Array.isArray(error.response.data.message)
+          ? error.response.data.message[0]
+          : error.response.data.message
+      );
       //console.log(res);
     }
 
@@ -404,7 +410,9 @@ export default function Register() {
                   </label>
                 </div>
                 <div className="label">
-                  <span className="label-text-alt">{errors.Role?.message}</span>
+                  <span className="label-text-alt">
+                    {errors.Role?.message || errch}
+                  </span>
                 </div>
               </label>
             </div>
