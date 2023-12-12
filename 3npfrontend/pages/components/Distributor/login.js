@@ -17,6 +17,7 @@ export default function Login() {
   const { register, handleSubmit, formState, reset, setValue } = form;
   const { errors } = formState;
   const [errch, seterrch] = useState("");
+  const [isErr, setisErr] = useState(false);
   const onSubmit = async (data) => {
     console.log("Form submitted", data);
     const userData = {
@@ -54,6 +55,7 @@ export default function Login() {
           ? error.response.data.message[0]
           : error.response.data.message
       );
+      setisErr(true);
       console.log(errch);
       reset();
       // Handle other errors (e.g., network issues, server errors)
@@ -133,7 +135,7 @@ export default function Login() {
                 />
                 <div className="label">
                   <span className="label-text-alt">
-                    {errors.Password?.message || errch}
+                    {errors.Password?.message || (isErr && errch)}
                   </span>
                 </div>
               </label>

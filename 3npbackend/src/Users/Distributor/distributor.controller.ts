@@ -82,8 +82,9 @@ export class DistributorController {
       return sendRes;
     }
     const result = await this.profileservice.addDistributor(disInfo);
-    if(result.message !== "") {sendRes.message=result.message;}
-    else sendRes.data=result;
+    if(result.message !== "") sendRes.message=result.message;
+    
+    else {sendRes.data=result;sendRes.success = "True";}
     return sendRes;
   }
 
