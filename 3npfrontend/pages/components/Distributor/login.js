@@ -51,9 +51,11 @@ export default function Login() {
       //alert("Wrong Email or Password");
 
       seterrch(
-        Array.isArray(error.response.data.message)
-          ? error.response.data.message[0]
-          : error.response.data.message
+        error.hasOwnProperty("response")
+          ? Array.isArray(error.response.data.message)
+            ? error.response.data.message[0]
+            : error.response.data.message
+          : error.message
       );
       setisErr(true);
       console.log(errch);
