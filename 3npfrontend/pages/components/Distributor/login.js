@@ -124,9 +124,6 @@ export default function Login() {
                       notEmpty: (fd) => {
                         return fd !== "" || "Field Cannot Be empty";
                       },
-                      checkData: (fd) => {
-                        return errch === "" || errch;
-                      },
                     },
                   })}
                 />

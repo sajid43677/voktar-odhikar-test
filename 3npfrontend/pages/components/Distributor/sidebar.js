@@ -39,7 +39,7 @@ export default function Sidebar(props) {
       }
     } catch (error) {
       console.log(error);
-      alert("Wrong Email or Password");
+
       // Handle other errors (e.g., network issues, server errors)
       // You can show an error message, handle it in some way, etc.
     }
