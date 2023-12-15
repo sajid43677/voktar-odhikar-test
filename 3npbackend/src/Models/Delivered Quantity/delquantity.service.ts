@@ -62,10 +62,10 @@ export class DelquantityService{
     
   }
 
-  async DeliveredQuantityDis()
+  async DeliveredQuantityDis(user)
   {
   //  const res = await this.productRepo.save(delquantityInfo);
-  const Delquant = await this.delquantityRepo.find();
+  const Delquant = await this.delquantityRepo.find({where:{distributor_name:user.name}});
   return Delquant;
     
   }

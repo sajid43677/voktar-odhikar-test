@@ -15,7 +15,11 @@ export default function Profile(props) {
     try {
       const res = await axios.post(
         process.env.NEXT_PUBLIC_API_End + "distributor/login/",
-        userData
+        userData,
+        {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          withCredentials: true,
+        }
       );
 
       console.log(res);
@@ -33,7 +37,11 @@ export default function Profile(props) {
       }
     } catch (error) {
       //console.log(error);
-      alert("Wrong Email or Password");
+      console.log(
+        error.hasOwnProperty("response")
+          ? error.response.data.message
+          : error.message
+      );
       // Handle other errors (e.g., network issues, server errors)
       // You can show an error message, handle it in some way, etc.
     }

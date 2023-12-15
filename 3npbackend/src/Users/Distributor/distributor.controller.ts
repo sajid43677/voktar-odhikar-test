@@ -203,16 +203,16 @@ export class DistributorController {
 
   @Get("viewinventory")
   @UsePipes(new ValidationPipe())
-  //@UseGuards(SessionGuardDis)
+  @UseGuards(SessionGuardDis)
   async viewinventory(@Session() session): Promise<DisProductEntity[] | { message: string }>{
-    //const user = session.user;
+    const user = session.user;
     
-    //if(user.role==="Distributor")
+    if(user.role==="Distributor")
     {
       try {
         
         //const products = await this.distributorservice.showDistributorProducts(session.user.name)
-        const products = await this.distributorservice.showDistributorProducts("Shajid Kamal Joy")
+        const products = await this.distributorservice.showDistributorProducts(user.name);
         console.log(products)
         if(products){
           
@@ -694,11 +694,11 @@ async logout(@Session() session) {
  
   }
 
-  @Get('redlisteddistributors')
-  //@UseGuards(SessionGuardDis)
+  @Get('redlistedindustry')
+  @UseGuards(SessionGuardDis)
   async RedlisteddistributorIND(@Session() session): Promise<RedListEntity[]| { message: string }> { 
-    //const user = session.user;
-    //if(user.role=="Industry")
+    const user = session.user;
+    if(user.role=="Distributor")
     {
       try {
         const redlistEntity = await this.redlistservice.redlisteindustryIND();
@@ -724,16 +724,16 @@ async logout(@Session() session) {
 
   @Get("deliveredquantity")
   @UsePipes(new ValidationPipe())
-  //@UseGuards(SessionGuardDis)
+  @UseGuards(SessionGuardDis)
   async deliveredQuantity(@Session() session): Promise<DelquantityEntity[] | { message: string }>{
-    //const user = session.user;
+    const user = session.user;
     
-    //if(user.role==="Distributor")
+    if(user.role==="Distributor")
     {
       try {
         
         //const products = await this.distributorservice.showDistributorProducts(session.user.name)
-        const products = await this.delquantityservice.DeliveredQuantityDis();
+        const products = await this.delquantityservice.DeliveredQuantityDis(user);
         console.log(products)
         if(products){
           

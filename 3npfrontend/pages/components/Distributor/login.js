@@ -28,7 +28,11 @@ export default function Login() {
     try {
       const res = await axios.post(
         process.env.NEXT_PUBLIC_API_End + "distributor/login/",
-        userData
+        userData,
+        {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          withCredentials: true,
+        }
       );
 
       console.log(res);
@@ -41,6 +45,7 @@ export default function Login() {
         // localStorage.setItem("token", res.data.token);
 
         // Redirect the user to the appropriate page
+        console.log("cookie: " + document.cookie);
         router.push({
           pathname: "../Distributor/distributor",
           query: { customProps: JSON.stringify(userData) },

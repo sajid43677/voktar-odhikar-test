@@ -10,7 +10,8 @@ export default function RedlistedInd() {
   const fetchPro = async () => {
     try {
       const res = await axios.get(
-        process.env.NEXT_PUBLIC_API_End + "distributor/redlisteddistributors/"
+        process.env.NEXT_PUBLIC_API_End + "distributor/redlistedindustry/",
+        { withCredentials: true }
       );
 
       console.log(res);
@@ -28,7 +29,11 @@ export default function RedlistedInd() {
       }
     } catch (error) {
       //console.log(error);
-      alert("Wrong Email or Password");
+      console.log(
+        error.hasOwnProperty("response")
+          ? error.response.data.message
+          : error.message
+      );
       // Handle other errors (e.g., network issues, server errors)
       // You can show an error message, handle it in some way, etc.
     }
