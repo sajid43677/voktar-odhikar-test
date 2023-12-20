@@ -8,10 +8,11 @@ import AlertDis from "../components/Distributor/alert";
 import MyCardDis from "../components/Distributor/cardDis";
 import Sidebar from "../components/Distributor/sidebar";
 import Navbar from "../components/navbar";
+import DisNavbar from "../components/Distributor/disnavbar";
 import Footer from "../components/footer";
 import { useRouter } from "next/router";
 
-export default function Distributor(props) {
+export default function Distributor() {
   const listinfos = [
     "Show Products",
     "Redlisted Industry",
@@ -26,18 +27,13 @@ export default function Distributor(props) {
 
   return (
     <>
-      <Navbar />
+      <DisNavbar />
       {/* {alertVisible && (
         <AlertDis alertType="success" onClose={() => setAlertVisible(false)}>
           Successfully logged in as <strong>Distributor</strong>
         </AlertDis>
       )} */}
-      <Sidebar
-        items={listinfos}
-        textSize="30"
-        email={customProps.email}
-        password={customProps.password}
-      />
+      <Sidebar items={listinfos} textSize="30" />
       <Footer />
     </>
   );

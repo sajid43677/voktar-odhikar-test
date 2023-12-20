@@ -2,14 +2,19 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useAuth } from "@/pages/utils/authcontext";
 
 export default function Profile(props) {
   const [isProfile, setisProfile] = useState(false);
   const [Profile, setProfile] = useState();
+  const { user, homego } = useAuth();
   const fetchPro = async () => {
+    if (user == null) {
+      homego();
+    }
     const userData = {
-      email: props.email,
-      password: props.password,
+      email: user.email,
+      password: user.password,
     };
     console.log(userData);
     try {

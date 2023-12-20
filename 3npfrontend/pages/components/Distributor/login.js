@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { useAuth } from "@/pages/utils/authcontext";
 
 export default function Login() {
   const router = useRouter();
@@ -18,6 +19,7 @@ export default function Login() {
   const { errors } = formState;
   const [errch, seterrch] = useState("");
   const [isErr, setisErr] = useState(false);
+  const { login } = useAuth();
   const onSubmit = async (data) => {
     console.log("Form submitted", data);
     const userData = {
@@ -46,9 +48,14 @@ export default function Login() {
 
         // Redirect the user to the appropriate page
         console.log("cookie: " + document.cookie);
+        login(
+          res.data.name,
+          userData.password,
+          userData.email,
+          document.cookie
+        );
         router.push({
           pathname: "../Distributor/distributor",
-          query: { customProps: JSON.stringify(userData) },
         }); // Replace "/dashboard" with the actual URL
       }
     } catch (error) {
