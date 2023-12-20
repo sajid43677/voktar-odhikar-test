@@ -23,7 +23,6 @@ export default function Distributor() {
   ];
   const [alertVisible, setAlertVisible] = useState(true);
   const router = useRouter();
-  const customProps = JSON.parse(router.query.customProps || "{}");
 
   return (
     <>
@@ -33,7 +32,7 @@ export default function Distributor() {
           Successfully logged in as <strong>Distributor</strong>
         </AlertDis>
       )} */}
-      <Sidebar items={listinfos} textSize="30" />
+      <Sidebar items={listinfos} textSize="22" />
       <Footer />
     </>
   );

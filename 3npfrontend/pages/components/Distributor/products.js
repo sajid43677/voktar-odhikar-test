@@ -2,11 +2,30 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
 export default function Products() {
   const headerColumns = ["", "Product", "Price", "Quantity Stored", ""];
   const [products, setProducts] = useState({});
   const [isProfile, setIsProfile] = useState(false);
+  const [Sdata, setSdata] = useState("");
+  const [issearch, setissearch] = useState(false);
+
+  const onSubmit = (data) => {
+    console.log("Form submitted", data);
+    setissearch(true);
+    setSdata(data.SearchData);
+  };
+
+  const form = useForm({
+    defaultValues: {
+      SearchData: "",
+    },
+
+    mode: "all",
+  });
+  const { register, handleSubmit, formState, reset, setValue } = form;
+  const { errors } = formState;
   const fetchPro = async () => {
     try {
       const res = await axios.get(
@@ -42,52 +61,90 @@ export default function Products() {
     // Run the fetchPro function when the component mounts
     fetchPro();
   }, []);
+
+  const see = (pro) => {
+    console.log(typeof pro);
+    console.log(typeof Sdata);
+  };
   return (
     <>
       <div>
         <div className="overflow-x-auto">
-          <table className="table table-xs table-pin-rows table-pin-cols">
-            {/* head */}
-            <thead>
-              <tr>
-                {headerColumns.map((column, index) => (
-                  <th key={index} className="text-xl ">
-                    {column}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {/* row 1 */}
-              {isProfile &&
-                products.map((content, index) => (
-                  <tr>
-                    <th>{index + 1}</th>
-                    <td>
-                      <div className="flex items-center gap-3">
-                        <div>
-                          <div className="font-bold">
-                            {content.product_name}
-                          </div>
-                          <div className="text-sm opacity-50">
-                            {content.distributor_name}
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      {content.distributor_price}
-                      <br />
-                    </td>
-                    <td>{content.product_quantity}</td>
-                    <th>
-                      <button className="btn btn-ghost btn-xs">details</button>
+          <div class=" h-screen  w-full m-2">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div class="max-w-sm">
+                <div class="flex space-x-4">
+                  <div class="flex rounded-md overflow-hidden w-full">
+                    <input
+                      class="input input-bordered w-full max-w-xs bg-inherit input-sm"
+                      {...register("SearchData")}
+                    />
+                    <button class="btn btn-outline mx-auto btn-sm">Go</button>
+                  </div>
+                </div>
+                <div className="label">
+                  <span className="label-text-alt">
+                    {errors.SearchData?.message}
+                  </span>
+                </div>
+              </div>
+            </form>
+            <table className="table table-xs table-pin-rows table-pin-cols">
+              {/* head */}
+              <thead>
+                <tr>
+                  {headerColumns.map((column, index) => (
+                    <th key={index} className="text-xl ">
+                      {column}
                     </th>
-                  </tr>
-                ))}
-            </tbody>
-            {/* foot */}
-          </table>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {/* row 1 */}
+                {isProfile &&
+                  products.map(
+                    (content, index) =>
+                      (!issearch ||
+                        (typeof Sdata === "string" &&
+                          content.product_name
+                            .toLowerCase()
+                            .includes(Sdata.toLowerCase())) ||
+                        !Sdata) && (
+                        <tr>
+                          <th>{index + 1}</th>
+                          <td>
+                            <div className="flex items-center gap-3">
+                              <div>
+                                <div className="font-bold">
+                                  {content.product_name}
+                                </div>
+                                <div className="text-sm opacity-50">
+                                  {content.distributor_name}
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            {content.distributor_price}
+                            <br />
+                          </td>
+                          <td>{content.product_quantity}</td>
+                          <th>
+                            <button
+                              className="btn btn-ghost btn-xs"
+                              onClick={() => see(content.product_name)}
+                            >
+                              details
+                            </button>
+                          </th>
+                        </tr>
+                      )
+                  )}
+              </tbody>
+              {/* foot */}
+            </table>
+          </div>
         </div>
       </div>
     </>
