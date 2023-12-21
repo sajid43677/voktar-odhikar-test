@@ -53,7 +53,8 @@ export default function Sidebar(props) {
 
   console.log(props);
   const listselect = (fd, idx) => {
-    setIndex(idx);
+    if (selectedIndex === idx) setIndex(-1);
+    else setIndex(idx);
     console.log(fd);
   };
   return (
