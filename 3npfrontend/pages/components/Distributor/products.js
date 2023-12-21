@@ -4,9 +4,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import EditProduct from "./editProduct";
+import AddProduct from "./addProduct";
 
 export default function Products() {
-  const headerColumns = ["", "Product", "Price", "Quantity Stored", ""];
+  const headerColumns = ["", "Product", "Price", "Quantity Stored"];
   const [products, setProducts] = useState({});
   const [isProfile, setIsProfile] = useState(false);
   const [Sdata, setSdata] = useState("");
@@ -64,6 +65,7 @@ export default function Products() {
   }, []);
 
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isadd, setisadd] = useState(false);
 
   // ... (your existing functions)
 
@@ -71,11 +73,15 @@ export default function Products() {
     console.log(pro);
     setSelectedProduct(pro);
   };
+
+  const addPro = () => {
+    setisadd(true);
+  };
   return (
     <>
       <div>
         <div className="overflow-x-auto">
-          {selectedProduct == null && (
+          {selectedProduct == null && !isadd && (
             <div class=" h-screen  w-full m-2">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div class="max-w-sm">
@@ -107,6 +113,14 @@ export default function Products() {
                         {column}
                       </th>
                     ))}
+                    <th>
+                      <button
+                        className="btn btn-ghost "
+                        onClick={() => addPro()}
+                      >
+                        Add Product
+                      </button>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -158,6 +172,11 @@ export default function Products() {
           {selectedProduct && (
             <div className="flex-grow bg-base-500 flex items-center justify-center mt-4 mb-4">
               <EditProduct product={selectedProduct}></EditProduct>
+            </div>
+          )}
+          {isadd && (
+            <div className="flex-grow bg-base-500 flex items-center justify-center mt-4 mb-4">
+              <AddProduct></AddProduct>
             </div>
           )}
         </div>
