@@ -157,21 +157,21 @@ export class VerificationService {
     }
   }
 
-  async checkVerificationDis(query: { name: string }): Promise<VerificationEntity> {
-    const dis = await this.profileService.getProfileByName(query)
-   
+  async checkVerificationDis(name): Promise<VerificationEntity> {
+    console.log(name);
+    const dis = await this.profileService.getProfileByName(name)
+    console.log(dis);
+   try{
     const profile = await this.verificationRepo.findOne({
-      where: { license_number: dis.license_number,verified: 'Yes' },
+      where: { license_number: dis.license_number},
     });
+    console.log(profile);
+    return profile;
+   }
+   catch(error){
+    throw error;
+   }
     
-    if (profile && profile.verified === 'Yes') {
-      // The profile with the specified name exists and is verified.
-      return profile;
-    } else {
-      
-      // The profile with the specified name does not exist or is not verified.
-      return null;
-    }
   }
 
   async addVerificationDis(verificationInfo: VerificationDisDTO,id:number): Promise<VerificationEntity> {

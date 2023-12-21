@@ -33,9 +33,9 @@ async getProfileById(id:number):Promise<ProfileEntity>
   return profile;
 }
 
-async getProfileByName(query: { name: string }): Promise<ProfileEntity> {
+async getProfileByName(username): Promise<ProfileEntity> {
   const profile =  this.profileRepo.findOne({where: {
-    name: query.name,
+    name: username,
   },
 })
   return profile;

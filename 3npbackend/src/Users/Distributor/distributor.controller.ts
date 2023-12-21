@@ -92,7 +92,7 @@ export class DistributorController {
   @UseGuards(SessionGuardDis)
   async checkDisVerification(@Session() session): Promise<VerificationEntity| { message: string }> { 
     const user = session.user;
-
+    console.log(user);
     if(user.role==="Distributor")
     {
       
@@ -100,19 +100,11 @@ export class DistributorController {
         
         const verified = await this.verificationservice.checkVerificationDis(user.name)
         
-        if(verified){
-          
-          return verified;
-        }
-        else{
-          return { message: 'Your license is not verified'};
-        }
+        return verified;
       }
       catch(error)
       {
-        if (error instanceof ProfiledoesnotExistsError){
-          return { message: 'No verification License given' };
-        }
+        throw error;
       }
   
     }
