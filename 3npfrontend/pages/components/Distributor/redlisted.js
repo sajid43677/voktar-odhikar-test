@@ -39,8 +39,8 @@ export default function RedlistedInd() {
     }
   };
   useEffect(() => {
-    // Run the fetchPro function when the component mounts
     fetchPro();
+    // Run the fetchPro function when the component mounts
   }, []);
   return (
     <>

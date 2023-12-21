@@ -47,9 +47,8 @@ export default function Sidebar(props) {
     // }
   };
   useEffect(() => {
-    // Run the fetchPro function when the component mounts
-    console.log(props);
     fetchPro();
+    // Run the fetchPro function when the component mounts
   }, []);
 
   console.log(props);

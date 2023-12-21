@@ -59,8 +59,8 @@ export default function Products() {
     }
   };
   useEffect(() => {
-    // Run the fetchPro function when the component mounts
     fetchPro();
+    // Run the fetchPro function when the component mounts
   }, []);
 
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -79,6 +79,9 @@ export default function Products() {
             <div class=" h-screen  w-full m-2">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div class="max-w-sm">
+                  <div className="label">
+                    <span className="label-text text-sm">Search Product</span>
+                  </div>
                   <div class="flex space-x-4">
                     <div class="flex rounded-md overflow-hidden w-full">
                       <input

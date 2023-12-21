@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/pages/utils/authcontext";
 import axios from "axios";
+import { useEffect } from "react";
 export default function DisNavbar() {
   const router = useRouter();
   const [isVerified, setisVerified] = useState(false);
   const { logout, user, homego } = useAuth();
-
+  console.log(user);
   const fetchPro = async () => {
     if (user == null) {
       homego();
@@ -44,7 +45,10 @@ export default function DisNavbar() {
     }
   };
 
-  fetchPro();
+  useEffect(() => {
+    fetchPro();
+    // Run the fetchPro function when the component mounts
+  }, []);
 
   const home = () => {
     // Add your sign-in logic here

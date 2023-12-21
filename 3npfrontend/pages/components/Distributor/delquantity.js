@@ -44,9 +44,10 @@ export default function Delquant() {
       // You can show an error message, handle it in some way, etc.
     }
   };
+
   useEffect(() => {
-    // Run the fetchPro function when the component mounts
     fetchPro();
+    // Run the fetchPro function when the component mounts
   }, []);
   return (
     <>

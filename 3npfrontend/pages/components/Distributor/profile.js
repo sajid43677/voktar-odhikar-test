@@ -52,9 +52,8 @@ export default function Profile(props) {
     }
   };
   useEffect(() => {
-    // Run the fetchPro function when the component mounts
     fetchPro();
-    console.log(props);
+    // Run the fetchPro function when the component mounts
   }, []);
 
   return (
