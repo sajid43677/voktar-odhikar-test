@@ -478,6 +478,7 @@ async updateDisPassword(@Body((new ValidationPipe()))password:UpdatepasswordDTO,
     @Session() session
   ) {
     verificationInfo.file_location_name = myfile.filename;
+    verificationInfo.license_number = session.user.license_number;
   
     const user = session.user;
   
