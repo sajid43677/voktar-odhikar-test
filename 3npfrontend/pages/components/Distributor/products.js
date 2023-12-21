@@ -144,7 +144,7 @@ export default function Products() {
                                 className="btn btn-ghost btn-xs"
                                 onClick={() => see(content)}
                               >
-                                details
+                                Update
                               </button>
                             </th>
                           </tr>

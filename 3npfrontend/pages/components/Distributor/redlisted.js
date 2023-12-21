@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 export default function RedlistedInd() {
-  const headerColumns = ["", "Name", "Reason", "Issuer", ""];
+  const headerColumns = ["", "Name", "Reason", "Issuer"];
   const [redlisted, setredlisted] = useState({});
   const [isProfile, setIsProfile] = useState(false);
   const fetchPro = async () => {
@@ -77,9 +77,6 @@ export default function RedlistedInd() {
                       <br />
                     </td>
                     <td>{content.issuer}</td>
-                    <th>
-                      <button className="btn btn-ghost btn-xs">details</button>
-                    </th>
                   </tr>
                 ))}
             </tbody>
