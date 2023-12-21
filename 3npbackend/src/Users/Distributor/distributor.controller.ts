@@ -269,7 +269,7 @@ export class DistributorController {
   @UseGuards(SessionGuardDis)
   async updateProductPrice(@Body() product: updateProductPrice, @Session() session): Promise<DisProductEntity | { message: string }>{
     const user = session.user;
-    
+    console.log(product);
     if(user.role==="Distributor")
     {
       try {
@@ -286,9 +286,7 @@ export class DistributorController {
       }
       catch(error)
       {
-        if (error instanceof productNotaAddedExist){
-          return { message: 'No product found in inventory with such name' };
-        }
+        throw error;
       }
   
     }

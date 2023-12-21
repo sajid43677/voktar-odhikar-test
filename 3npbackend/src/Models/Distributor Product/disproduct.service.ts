@@ -45,6 +45,7 @@ export class DisProductService{
 
   async updateProduct(product,@Session() session):Promise<DisProductEntity|null>
   {
+    console.log(product);
     let pro =  await this.productRepo.findOne({where: {
         product_name: product.product_name,
         profile:session.user
