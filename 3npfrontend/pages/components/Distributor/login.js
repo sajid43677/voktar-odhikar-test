@@ -9,8 +9,8 @@ export default function Login() {
   const router = useRouter();
   const form = useForm({
     defaultValues: {
-      Email: "",
-      Password: "",
+      Email: "asdas@gmail.com",
+      Password: "Sajid@259#",
     },
 
     mode: "all",

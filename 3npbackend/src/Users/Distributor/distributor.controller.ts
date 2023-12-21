@@ -620,9 +620,12 @@ async reportAdmin(@Body((new ValidationPipe()))notice:ReportandNoticePostDisDTO,
 @Delete("deletestockproduct")
 @UsePipes(new ValidationPipe())
 @UseGuards(SessionGuardDis)
-async deleteStockProduct(@Body() product: DeleteProduct, @Session() session): Promise<DisProductEntity | { message: string }|DeleteResult>{
+async deleteStockProduct(@Query('product_name') producte: string, @Session() session): Promise<DisProductEntity | { message: string }|DeleteResult>{
   const user = session.user;
-  
+  const product ={
+    product_name:producte
+  }
+  console.log(product);
   if(user.role==="Distributor")
   {
     try {

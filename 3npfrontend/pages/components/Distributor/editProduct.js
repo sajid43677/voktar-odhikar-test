@@ -97,9 +97,32 @@ export default function EditProduct(props) {
     }
     if (isErr === false) setupdated(true);
   };
+  const dltProduct = async () => {
+    try {
+      const res = await axios.delete(
+        process.env.NEXT_PUBLIC_API_End +
+          `distributor/deletestockproduct?product_name=${props.product.product_name}`,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      console.log(res);
+      if (res.status >= 200 && res.status < 300) {
+        // Replace "/dashboard" with the actual URL
+        router.push("../Distributor/distributor");
+      }
+    } catch (error) {
+      console.log(error);
+      //alert("Wrong Email or Password");
+
+      // Handle other errors (e.g., network issues, server errors)
+      // You can show an error message, handle it in some way, etc.
+    }
+  };
   return (
     <>
-      <div className="">
+      <div className="flex justify-between">
         <div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
@@ -188,10 +211,18 @@ export default function EditProduct(props) {
             </div>
             <div>
               {updated && (
-                <a className="text-sm  text-green-600">Product Updaated</a>
+                <a className="text-sm  text-green-600">Product Updated</a>
               )}
             </div>
           </form>
+        </div>
+        <div className="flex items-end">
+          <button
+            className="btn btn-sm btn-outline btn-warning ml-50"
+            onClick={dltProduct}
+          >
+            Delete Product
+          </button>
         </div>
       </div>
     </>
