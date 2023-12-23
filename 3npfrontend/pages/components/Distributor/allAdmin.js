@@ -90,10 +90,10 @@ export default function ShowAdmin() {
                 <th>
                   <div className="form-control">
                     <label className="label cursor-pointer">
-                      <span className="label-text">My Region</span>
+                      <span className="text-sm text-green-700">My Region</span>
                       <input
                         type="checkbox"
-                        className="toggle"
+                        className="toggle toggle-sm"
                         checked={isToggleChecked}
                         onChange={() => setIsToggleChecked(!isToggleChecked)}
                       />
