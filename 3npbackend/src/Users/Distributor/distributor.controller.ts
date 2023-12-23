@@ -545,6 +545,181 @@ async updateDisPassword(@Body((new ValidationPipe()))password:UpdatepasswordDTO,
     }
   }
 
+  @Get("viewiindustrylistReg")
+  @UsePipes(new ValidationPipe())
+  @UseGuards(SessionGuardDis)
+  async viewIndustryListReg(@Session() session): Promise<ProfileEntity[] | { message: string }>{
+    const user = session.user;
+    
+    if(user.role==="Distributor")
+    {
+      try {
+        
+        const products = await this.profileservice.ViewallIndustrynameRegDis(session)
+        console.log(products)
+        if(products){
+          
+          return products;
+        }
+        else{
+          return { message: 'No product in inventory'};
+        }
+      }
+      catch(error)
+      {
+        if (error instanceof productNotaAddedExist){
+          return { message: 'No product added' };
+        }
+      }
+  
+    }
+    else
+    {
+      return { message: 'You are a Unauthorized User' };
+  
+    }
+  }
+
+  @Get("viewiDistributorlist")
+  @UsePipes(new ValidationPipe())
+  @UseGuards(SessionGuardDis)
+  async viewDistributorList(@Session() session): Promise<ProfileEntity[] | { message: string }>{
+    const user = session.user;
+    
+    if(user.role==="Distributor")
+    {
+      try {
+        
+        const products = await this.profileservice.ViewallDistributorNameDis();
+        console.log(products)
+        if(products){
+          
+          return products;
+        }
+        else{
+          return { message: 'No product in inventory'};
+        }
+      }
+      catch(error)
+      {
+        if (error instanceof productNotaAddedExist){
+          return { message: 'No product added' };
+        }
+      }
+  
+    }
+    else
+    {
+      return { message: 'You are a Unauthorized User' };
+  
+    }
+  }
+
+  @Get("viewiDistributorlistReg")
+  @UsePipes(new ValidationPipe())
+  @UseGuards(SessionGuardDis)
+  async viewDistributorListReg(@Session() session): Promise<ProfileEntity[] | { message: string }>{
+    const user = session.user;
+    
+    if(user.role==="Distributor")
+    {
+      try {
+        
+        const products = await this.profileservice.ViewallDistributornameRegDis(session);
+        console.log(products)
+        if(products){
+          
+          return products;
+        }
+        else{
+          return { message: 'No product in inventory'};
+        }
+      }
+      catch(error)
+      {
+        if (error instanceof productNotaAddedExist){
+          return { message: 'No product added' };
+        }
+      }
+  
+    }
+    else
+    {
+      return { message: 'You are a Unauthorized User' };
+  
+    }
+  }
+
+  @Get("viewiAdminlist")
+  @UsePipes(new ValidationPipe())
+  @UseGuards(SessionGuardDis)
+  async viewAdminList(@Session() session): Promise<ProfileEntity[] | { message: string }>{
+    const user = session.user;
+    
+    if(user.role==="Distributor")
+    {
+      try {
+        
+        const products = await this.profileservice.ViewallAdminNameDis();
+        console.log(products)
+        if(products){
+          
+          return products;
+        }
+        else{
+          return { message: 'No product in inventory'};
+        }
+      }
+      catch(error)
+      {
+        if (error instanceof productNotaAddedExist){
+          return { message: 'No product added' };
+        }
+      }
+  
+    }
+    else
+    {
+      return { message: 'You are a Unauthorized User' };
+  
+    }
+  }
+
+  @Get("viewiAdminlistReg")
+  @UsePipes(new ValidationPipe())
+  @UseGuards(SessionGuardDis)
+  async viewAdminListReg(@Session() session): Promise<ProfileEntity[] | { message: string }>{
+    const user = session.user;
+    
+    if(user.role==="Distributor")
+    {
+      try {
+        
+        const products = await this.profileservice.ViewallAdminnameRegDis(session);
+        console.log(products)
+        if(products){
+          
+          return products;
+        }
+        else{
+          return { message: 'No product in inventory'};
+        }
+      }
+      catch(error)
+      {
+        if (error instanceof productNotaAddedExist){
+          return { message: 'No product added' };
+        }
+      }
+  
+    }
+    else
+    {
+      return { message: 'You are a Unauthorized User' };
+  
+    }
+  }
+
   @Patch('/updatedisregion')
   @UseGuards(SessionGuardDis)
   async updateDisRegion(@Body((new ValidationPipe()))region:UpdateRegionDisDTO, @Session() session): Promise<ProfileEntity | { message: string } | { success: boolean }>{

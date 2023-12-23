@@ -8,6 +8,9 @@ import RedlistedInd from "./redlisted";
 import Delquant from "./delquantity";
 import { useAuth } from "@/pages/utils/authcontext";
 import { useRouter } from "next/router";
+import ShowInd from "./allIndustry";
+import ShowDis from "./allDistributor";
+import ShowAdmin from "./allAdmin";
 
 export default function Sidebar(props) {
   const [selectedIndex, setIndex] = useState(-1);
@@ -64,9 +67,12 @@ export default function Sidebar(props) {
         <div className="drawer-content flex flex-col">
           {/* Page content here */}
           {selectedIndex === 0 && <Products />}
-          {selectedIndex === 5 && <Profile />}
+          {selectedIndex === 8 && <Profile />}
           {selectedIndex === 1 && <RedlistedInd />}
           {selectedIndex === 2 && <Delquant />}
+          {selectedIndex === 5 && <ShowInd />}
+          {selectedIndex === 6 && <ShowDis />}
+          {selectedIndex === 7 && <ShowAdmin />}
         </div>
         <div className="drawer-side">
           <label

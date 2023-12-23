@@ -302,7 +302,114 @@ async ViewallIndustrynameDis(@Session() session)
 
   const profiles = await this.profileRepo.find({
     where: {
+      role: 'Industry'
+    },
+    select: ['name', 'email', 'phone_number', 'region'],
+  });
+  if(profiles.length===0)
+  {
+    throw new NoIndustryFound();
+  }
+  else
+  {
+    return profiles;
+  }
+
+  // const names = profiles.map(profile => profile.name);
+  // return names
+
+}
+
+async ViewallIndustrynameRegDis(@Session() session)
+{
+
+  const profiles = await this.profileRepo.find({
+    where: {
       role: 'Industry',region: session.user.region
+    },
+    select: ['name', 'email', 'phone_number', 'region'],
+  });
+  if(profiles.length===0)
+  {
+    throw new NoIndustryFound();
+  }
+  else
+  {
+    return profiles;
+  }
+
+  // const names = profiles.map(profile => profile.name);
+  // return names
+
+}
+
+async ViewallDistributorNameDis()
+  {
+  
+    const profiles = await this.profileRepo.find({
+      where: {
+        role: 'Distributor',
+      },
+      select: ['name', 'email', 'phone_number', 'region'],
+    });
+    
+    if(profiles.length===0)
+    {
+      throw new NoDistributorFound();
+    }
+    else
+    {
+      return profiles;
+    }
+  }
+  async ViewallDistributornameRegDis(@Session() session)
+{
+
+  const profiles = await this.profileRepo.find({
+    where: {
+      role: 'Distributor',region: session.user.region
+    },
+    select: ['name', 'email', 'phone_number', 'region'],
+  });
+  if(profiles.length===0)
+  {
+    throw new NoIndustryFound();
+  }
+  else
+  {
+    return profiles;
+  }
+
+  // const names = profiles.map(profile => profile.name);
+  // return names
+
+}
+
+async ViewallAdminNameDis()
+  {
+  
+    const profiles = await this.profileRepo.find({
+      where: {
+        role: 'Admin',
+      },
+      select: ['name', 'email', 'phone_number', 'region'],
+    });
+    
+    if(profiles.length===0)
+    {
+      throw new NoDistributorFound();
+    }
+    else
+    {
+      return profiles;
+    }
+  }
+  async ViewallAdminnameRegDis(@Session() session)
+{
+
+  const profiles = await this.profileRepo.find({
+    where: {
+      role: 'Admin',region: session.user.region
     },
     select: ['name', 'email', 'phone_number', 'region'],
   });

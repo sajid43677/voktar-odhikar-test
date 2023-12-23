@@ -19,6 +19,9 @@ export default function Distributor() {
     "Delivered Products",
     "Report",
     "License Verification",
+    "Industries",
+    "Distributors",
+    "Admins",
     "profile",
   ];
   const [alertVisible, setAlertVisible] = useState(true);
