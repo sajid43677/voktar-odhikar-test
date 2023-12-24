@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useAuth } from "@/pages/utils/authcontext";
+import EditProfile from "./editProfile";
 
 export default function Profile(props) {
   const [isProfile, setisProfile] = useState(false);
@@ -58,17 +59,7 @@ export default function Profile(props) {
 
   return (
     <>
-      <div>
-        {isProfile && (
-          <ul className="list-decimal justify-center items-center">
-            <li>Username: {Profile.name}</li>
-            <li>Email: {Profile.email}</li>
-            <li>License: {Profile.license_number}</li>
-            <li>Region: {Profile.region}</li>
-            <li>Role: {Profile.role}</li>
-          </ul>
-        )}
-      </div>
+      <div>{isProfile && <EditProfile profile={Profile}></EditProfile>}</div>
     </>
   );
 }

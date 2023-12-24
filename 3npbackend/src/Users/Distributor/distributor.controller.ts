@@ -331,7 +331,7 @@ export class DistributorController {
     }
   }
 
-  @Put('/updatedisprofile')
+  @Patch('/updatedisprofile')
   @UseGuards(SessionGuardDis)
   async updatedisprofile(@Body((new ValidationPipe()))ProfileInfo:UpdateDisDTO, @Session() session): Promise<ProfileEntity | { message: string } | { success: boolean }>{
   const user = session.user;

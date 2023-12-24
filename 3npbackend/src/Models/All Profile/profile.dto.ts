@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty,IsString,Matches,IsIn,Length } from 'class-validator'
-const validDistricts = ['Dhaka', 'Chattogram', 'Rajshahi', 'Khulna', 'Barishal', 'Sylhet', 'Rangpur', 'Mymensingh'];
+const validDistricts = ['Dhaka', 'Chattogram', 'Rajshahi', 'Khulna', 'Barisal', 'Sylhet', 'Rangpur', 'Mymensingh'];
 const validUsers = ['Admin', 'User', 'Industry', 'Distributor'];
 
 export class ProfileDTO{

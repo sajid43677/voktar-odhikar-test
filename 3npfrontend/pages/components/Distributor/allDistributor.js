@@ -56,7 +56,7 @@ export default function ShowDis() {
         // localStorage.setItem("token", res.data.token);
         console.log(res.data);
         setredlistedR(res.data);
-        console.log(redlisted);
+        console.log(redlistedR);
         setIsProfiler(true);
       }
     } catch (error) {
@@ -107,6 +107,7 @@ export default function ShowDis() {
               {/* row 1 */}
               {!isToggleChecked &&
                 isProfile &&
+                redlisted &&
                 redlisted.map((content, index) => (
                   <tr>
                     <th>{index + 1}</th>
@@ -129,6 +130,7 @@ export default function ShowDis() {
               {/*region*/}
               {isToggleChecked &&
                 isProfiler &&
+                redlistedR &&
                 redlistedR.map((content, index) => (
                   <tr>
                     <th>{index + 1}</th>

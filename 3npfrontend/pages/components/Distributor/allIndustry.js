@@ -106,6 +106,7 @@ export default function ShowInd() {
               {/* row 1 */}
               {!isToggleChecked &&
                 isProfile &&
+                redlisted &&
                 redlisted.map((content, index) => (
                   <tr>
                     <th>{index + 1}</th>
@@ -128,6 +129,7 @@ export default function ShowInd() {
               {/*region*/}
               {isToggleChecked &&
                 isProfiler &&
+                redlistedR &&
                 redlistedR.map((content, index) => (
                   <tr>
                     <th>{index + 1}</th>
