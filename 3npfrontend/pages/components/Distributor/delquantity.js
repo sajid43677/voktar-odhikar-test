@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import AddDelivary from "./adddelivary";
 
 export default function Delquant() {
   const headerColumns = [
@@ -13,6 +14,8 @@ export default function Delquant() {
   ];
   const [redlisted, setredlisted] = useState({});
   const [isProfile, setIsProfile] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isadd, setisadd] = useState(false);
   const fetchPro = async () => {
     try {
       const res = await axios.get(
@@ -49,53 +52,69 @@ export default function Delquant() {
     fetchPro();
     // Run the fetchPro function when the component mounts
   }, []);
+
+  const addPro = () => {
+    setisadd(true);
+  };
   return (
     <>
-      <div>
-        <div className="overflow-x-auto">
-          <table className="table table-xs table-pin-rows table-pin-cols">
-            {/* head */}
-            <thead>
-              <tr>
-                {headerColumns.map((column, index) => (
-                  <th key={index} className="text-xl ">
-                    {column}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {/* row 1 */}
-              {isProfile &&
-                redlisted.map((content, index) => (
-                  <tr>
-                    <th>{index + 1}</th>
-                    <td>
-                      <div className="flex items-center gap-3">
-                        <div>
-                          <div className="font-bold">
-                            {content.distributor_name}
-                          </div>
-                          <div className="text-sm opacity-50"></div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      {content.product_name}
-
-                      <br />
-                    </td>
-                    <td>{content.delivered_quantity}</td>
-                    <th>
-                      <button className="btn btn-ghost btn-xs">Update</button>
+      {!isadd && (
+        <div>
+          <div className="overflow-x-auto">
+            <table className="table table-xs table-pin-rows table-pin-cols">
+              {/* head */}
+              <thead>
+                <tr>
+                  {headerColumns.map((column, index) => (
+                    <th key={index} className="text-xl ">
+                      {column}
                     </th>
-                  </tr>
-                ))}
-            </tbody>
-            {/* foot */}
-          </table>
+                  ))}
+                  <th>
+                    <button className="btn btn-ghost " onClick={() => addPro()}>
+                      Add Product
+                    </button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* row 1 */}
+                {isProfile &&
+                  redlisted.map((content, index) => (
+                    <tr>
+                      <th>{index + 1}</th>
+                      <td>
+                        <div className="flex items-center gap-3">
+                          <div>
+                            <div className="font-bold">
+                              {content.distributor_name}
+                            </div>
+                            <div className="text-sm opacity-50"></div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        {content.product_name}
+
+                        <br />
+                      </td>
+                      <td>{content.delivered_quantity}</td>
+                      <th>
+                        <button className="btn btn-ghost btn-xs">Update</button>
+                      </th>
+                    </tr>
+                  ))}
+              </tbody>
+              {/* foot */}
+            </table>
+          </div>
         </div>
-      </div>
+      )}
+      {isadd && (
+        <div>
+          <AddDelivary></AddDelivary>
+        </div>
+      )}
     </>
   );
 }

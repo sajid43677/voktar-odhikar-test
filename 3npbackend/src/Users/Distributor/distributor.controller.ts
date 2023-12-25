@@ -313,20 +313,18 @@ export class DistributorController {
           return productver;
         }
         else{
-          return { message: 'Product not delivered'};
+          throw BadRequestException;
         }
       }
       catch(error)
       {
-        if (error instanceof productNotaAddedExist){
-          return { message: 'No product found in inventory with such name' };
-        }
+        throw error;
       }
   
     }
     else
     {
-      return { message: 'You are a Unauthorized User' };
+      throw UnauthorizedException;
   
     }
   }
