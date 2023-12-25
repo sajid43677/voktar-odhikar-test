@@ -19,6 +19,7 @@ export default function AddDelivary() {
   const { register, handleSubmit, formState, reset, setValue } = form;
   const { errors } = formState;
   const [errch, seterrch] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState("");
   const [updated, setupdated] = useState(false);
   const [isErr, setisErr] = useState(false);
 
@@ -150,6 +151,7 @@ export default function AddDelivary() {
                     {...register("product_name", {
                       validate: {
                         notEmpty: (fd) => {
+                          setSelectedProduct(fd);
                           return fd !== "Select Product" || "Select product";
                         },
                         notEmpty2: (fd) => {
@@ -162,8 +164,7 @@ export default function AddDelivary() {
                       Select Product
                     </option>
 
-                    {!isToggleChecked &&
-                      isProfile &&
+                    {isProfile &&
                       redlisted &&
                       redlisted.map((content, index) => (
                         <option value={content.product_name}>
@@ -197,12 +198,22 @@ export default function AddDelivary() {
                         notEmpty: (fd) => {
                           return fd !== "" || "Field Cannot Be empty";
                         },
+                        quantity: (fd) => {
+                          const currq = parseInt(fd, 10);
+                          var maxq = 0;
+                          redlisted.forEach((product) => {
+                            if (product.product_name === selectedProduct) {
+                              maxq = product.product_quantity;
+                            }
+                          });
+                          return fd <= maxq || "Quantity not available";
+                        },
                       },
                     })}
                   />
                   <div className="label">
                     <span className="label-text-alt">
-                      {errors.delivered_quantity?.message}
+                      {errors.delivered_quantity?.message || errch}
                     </span>
                   </div>
                 </label>

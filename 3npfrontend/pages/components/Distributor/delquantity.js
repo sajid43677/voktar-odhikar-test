@@ -99,9 +99,7 @@ export default function Delquant() {
                         <br />
                       </td>
                       <td>{content.delivered_quantity}</td>
-                      <th>
-                        <button className="btn btn-ghost btn-xs">Update</button>
-                      </th>
+                      <th></th>
                     </tr>
                   ))}
               </tbody>
