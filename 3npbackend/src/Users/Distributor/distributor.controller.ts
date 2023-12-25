@@ -784,11 +784,7 @@ async reportAdmin(@Body((new ValidationPipe()))notice:ReportandNoticePostDisDTO,
       return profile;
     }
   } catch (error) {
-    console.error(error);
-
-    if (error) {
-      return { success: false, message: "An unexpected error occurred." };
-    }
+    throw error;
   }
 }
 

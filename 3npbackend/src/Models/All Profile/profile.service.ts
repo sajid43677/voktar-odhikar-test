@@ -34,10 +34,17 @@ async getProfileById(id:number):Promise<ProfileEntity>
 }
 
 async getProfileByName(username): Promise<ProfileEntity> {
-  const profile =  this.profileRepo.findOne({where: {
-    name: username,
-  },
-})
+  console.log(username);
+  try{
+    var profile =  this.profileRepo.findOne({where: {
+      name: username.name,
+    },
+  })
+  }
+  catch(error){
+    throw error;
+  }
+  
   return profile;
 }
 

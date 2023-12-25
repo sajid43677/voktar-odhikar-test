@@ -12,6 +12,7 @@ import ShowInd from "./allIndustry";
 import ShowDis from "./allDistributor";
 import ShowAdmin from "./allAdmin";
 import UploadLisence from "./uploadLicense";
+import ReportAdmin from "./report";
 
 export default function Sidebar(props) {
   const [selectedIndex, setIndex] = useState(-1);
@@ -75,6 +76,7 @@ export default function Sidebar(props) {
           {selectedIndex === 6 && <ShowDis />}
           {selectedIndex === 7 && <ShowAdmin />}
           {selectedIndex === 4 && <UploadLisence />}
+          {selectedIndex === 3 && <ReportAdmin />}
         </div>
         <div className="drawer-side">
           <label

@@ -43,15 +43,20 @@ export class ReportandNoticeService {
    }
 
    async noticeandreportDis(reportandnoticeInfo: ReportandNoticeDisDTO, id: number): Promise<ReportandNoticeEntity|{error:string}> {
-    const reportOrNotice = this.reportandnoticeRepo.create(reportandnoticeInfo);
-    const distributor = await this.profileService.getProfileById(id);
-    const existsindustryanddistributor = await this.profileService.getProfileByName({ name: reportandnoticeInfo.receiver });
-
+    console.log(reportandnoticeInfo);
+    try{
+    var reportOrNotice = this.reportandnoticeRepo.create(reportandnoticeInfo);
+    var distributor = await this.profileService.getProfileById(id);
+    var existsindustryanddistributor = await this.profileService.getProfileByName({ name: reportandnoticeInfo.receiver });
+    console.log(existsindustryanddistributor);
     if (!existsindustryanddistributor || existsindustryanddistributor.role !== "Admin") {
       throw new Error('Admin with the specified name does not exist.');
     }
-    else
-    {
+  }
+    catch(error){
+      throw error;
+    }
+    try{
       reportOrNotice.name = distributor.name; 
       reportOrNotice.reporterrole = distributor.role; 
       const profileArray = [distributor];
@@ -60,6 +65,9 @@ export class ReportandNoticeService {
       const res = await this.reportandnoticeRepo.save(reportOrNotice);
     
       return res; 
+    }
+    catch(error){
+      throw error;
     }
 
    }
