@@ -58,6 +58,7 @@ export default function Dashboard() {
         { withCredentials: true }
       );
       setDistributors(res4.data);
+      setIsProfile(true);
     } catch (error) {
       console.log(
         error.hasOwnProperty("response")
@@ -89,34 +90,36 @@ export default function Dashboard() {
   };
   return (
     <>
-      <div className="flex justify-center items-center h-screen">
-        <div className="stats stats-vertical lg:stats-horizontal shadow">
-          <div className="stat">
-            <div className="stat-title">Total Products</div>
-            <div className="stat-value">{products.length}</div>
-          </div>
+      {isProfile && (
+        <div className="flex justify-center items-center h-screen">
+          <div className="stats stats-vertical  shadow text-4xl">
+            <div className="stat">
+              <div className="stat-title">Total Products</div>
+              <div className="stat-value">{products.length}</div>
+            </div>
 
-          <div className="stat">
-            <div className="stat-title">Total Registered Users</div>
-            <div className="stat-value">
-              {distributors.length + industries.length + admins.length}
+            <div className="stat">
+              <div className="stat-title">Total Registered Users</div>
+              <div className="stat-value">
+                {distributors.length + industries.length + admins.length}
+              </div>
+            </div>
+
+            <div className="stat">
+              <div className="stat-title">Admins</div>
+              <div className="stat-value">{admins.length}</div>
+            </div>
+            <div className="stat">
+              <div className="stat-title">Distributors</div>
+              <div className="stat-value">{distributors.length}</div>
+            </div>
+            <div className="stat">
+              <div className="stat-title">Industries</div>
+              <div className="stat-value">{industries.length}</div>
             </div>
           </div>
-
-          <div className="stat">
-            <div className="stat-title">Admins</div>
-            <div className="stat-value">{admins.length}</div>
-          </div>
-          <div className="stat">
-            <div className="stat-title">Distributors</div>
-            <div className="stat-value">{distributors.length}</div>
-          </div>
-          <div className="stat">
-            <div className="stat-title">Industries</div>
-            <div className="stat-value">{industries.length}</div>
-          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
