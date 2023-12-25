@@ -12,7 +12,7 @@ export default function EditProfile(props) {
     defaultValues: {
       Name: Profile.name,
       Email: Profile.email,
-      Password: Profile.password,
+      Password: "",
       region: Profile.region,
       phone: Profile.phone_number,
       LicenseNum: Profile.license_number,
@@ -212,7 +212,7 @@ export default function EditProfile(props) {
               <label className="form-control w-full max-w-xs">
                 <div className="label">
                   <span className="label-text text-lg text-slate-900">
-                    Password
+                    New Password
                   </span>
                 </div>
                 <input
