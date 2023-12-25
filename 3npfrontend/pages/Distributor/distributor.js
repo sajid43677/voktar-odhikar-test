@@ -23,6 +23,7 @@ export default function Distributor() {
     "Distributors",
     "Admins",
     "profile",
+    "Overview",
   ];
   const [alertVisible, setAlertVisible] = useState(true);
   const router = useRouter();
