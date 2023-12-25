@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 export default function UploadLisence() {
   const router = useRouter();
   const [isVerified, setisVerified] = useState(false);
+  const [isVerified2, setisVerified2] = useState(false);
   const { logout, user, homego } = useAuth();
 
   const form = useForm({
@@ -44,6 +45,7 @@ export default function UploadLisence() {
         // localStorage.setItem("token", res.data.token);
         console.log(res);
         if (res.data.verified == "Yes") setisVerified(true);
+        else setisVerified2(true);
 
         // Redirect the user to the appropriate page
       }
@@ -84,6 +86,7 @@ export default function UploadLisence() {
         // For example:
         // localStorage.setItem("token", res.data.token);
         // Redirect the user to the appropriate page
+        setisVerified(true);
       }
     } catch (error) {
       console.log(error);
@@ -111,16 +114,28 @@ export default function UploadLisence() {
   return (
     <>
       {isVerified && (
-        <div className="toast toast-center toast-middle ">
-          <div className="alert alert-info text-5xl">
-            <span>You are already</span>
-          </div>
-          <div className="alert alert-success text-5xl">
-            <span>verified</span>
+        <div className="flex justify-center items-center h-screen">
+          <div className="card w-96 bg-base-100 shadow-xl">
+            <div className="card-body">
+              <div className="card-actions justify-center items-center"></div>
+              <p>You already verified.</p>
+            </div>
           </div>
         </div>
       )}
-      {!isVerified && (
+      {isVerified2 && (
+        <div className="flex justify-center items-center h-screen">
+          <div className="card w-96 bg-base-100 shadow-xl">
+            <div className="card-body">
+              <div className="card-actions justify-center items-center"></div>
+              <p>
+                You already uploaded your license. Wait for admin to approve
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+      {!isVerified && !isVerified2 && (
         <div className="bg-base-500 flex items-center justify-center mt-4 mb-4">
           <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
             <form onSubmit={handleSubmit(onSubmit)}>
