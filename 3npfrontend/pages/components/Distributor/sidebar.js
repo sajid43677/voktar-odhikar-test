@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import ShowInd from "./allIndustry";
 import ShowDis from "./allDistributor";
 import ShowAdmin from "./allAdmin";
+import UploadLisence from "./uploadLicense";
 
 export default function Sidebar(props) {
   const [selectedIndex, setIndex] = useState(-1);
@@ -73,6 +74,7 @@ export default function Sidebar(props) {
           {selectedIndex === 5 && <ShowInd />}
           {selectedIndex === 6 && <ShowDis />}
           {selectedIndex === 7 && <ShowAdmin />}
+          {selectedIndex === 4 && <UploadLisence />}
         </div>
         <div className="drawer-side">
           <label
