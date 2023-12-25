@@ -94,7 +94,7 @@ export default function Dashboard() {
         <div className="flex justify-center items-center h-screen">
           <div className="stats stats-vertical  shadow text-4xl">
             <div className="stat">
-              <div className="stat-title">Total Products</div>
+              <div className="stat-title">My Total Products</div>
               <div className="stat-value">{products.length}</div>
             </div>
 
