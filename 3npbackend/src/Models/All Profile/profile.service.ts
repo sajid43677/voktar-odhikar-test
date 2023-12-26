@@ -29,8 +29,14 @@ export class ProfileService {
 
 async getProfileById(id:number):Promise<ProfileEntity>
 {
-  const profile = await this.profileRepo.findOne({ where: { uid : id } });
+  try{
+    const profile = await this.profileRepo.findOne({ where: { uid : id } });
   return profile;
+  }
+  catch(error){
+    throw error;
+  }
+  
 }
 
 async getProfileByName(username): Promise<ProfileEntity> {

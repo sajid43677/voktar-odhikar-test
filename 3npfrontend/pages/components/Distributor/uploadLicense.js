@@ -45,7 +45,7 @@ export default function UploadLisence() {
         // localStorage.setItem("token", res.data.token);
         console.log(res);
         if (res.data.verified == "Yes") setisVerified(true);
-        else setisVerified2(true);
+        if (res.data.verified == "No") setisVerified2(true);
 
         // Redirect the user to the appropriate page
       }

@@ -98,7 +98,7 @@ export class DistributorController {
       
       try {
         
-        const verified = await this.verificationservice.checkVerificationDis(user.name)
+        const verified = await this.verificationservice.checkVerificationDis(user.uid)
         
         return verified;
       }
