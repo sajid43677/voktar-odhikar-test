@@ -60,6 +60,7 @@ export default function RedlistedInd() {
             <tbody>
               {/* row 1 */}
               {isProfile &&
+                redlisted &&
                 redlisted.map((content, index) => (
                   <tr>
                     <th>{index + 1}</th>

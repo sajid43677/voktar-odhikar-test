@@ -3,12 +3,11 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import EditProduct from "./editProduct";
-import AddProduct from "./addProduct";
+import RedListtheDistributor from "./RedListtheDistributor";
 
-export default function Products() {
-  const headerColumns = ["", "Product", "Price", "Quantity Stored"];
-  const [products, setProducts] = useState({});
+export default function AllDistributorName() {
+    const headerColumns = ["", "Name", "Email", "Phone Number","Region", ""];
+  const [alldistributor, setAllDistributor] = useState({});
   const [isProfile, setIsProfile] = useState(false);
   const [Sdata, setSdata] = useState("");
   const [issearch, setissearch] = useState(false);
@@ -31,21 +30,16 @@ export default function Products() {
   const fetchPro = async () => {
     try {
       const res = await axios.get(
-        process.env.NEXT_PUBLIC_API_End + "distributor/viewinventory/",
+        process.env.NEXT_PUBLIC_API_End + "admin/getalldistributor/",
         { withCredentials: true }
       );
 
       console.log(res);
-
-      //Check if the response status is successful (e.g., HTTP status code 200)
       if (res.status >= 200 && res.status < 300) {
-        // You may want to store the authentication token or user information
-        // in the state or context
-        // For example:
-        // localStorage.setItem("token", res.data.token);
+
         console.log(res.data);
-        setProducts(res.data);
-        console.log(products);
+        setAllDistributor(res.data);
+        console.log(alldistributor);
         setIsProfile(true);
       }
     } catch (error) {
@@ -64,29 +58,24 @@ export default function Products() {
     // Run the fetchPro function when the component mounts
   }, []);
 
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isadd, setisadd] = useState(false);
+  const [selectedIndustry, setSelectedIndustry] = useState(null);
 
   // ... (your existing functions)
 
   const see = (pro) => {
     console.log(pro);
-    setSelectedProduct(pro);
-  };
-
-  const addPro = () => {
-    setisadd(true);
+    setSelectedIndustry(pro);
   };
   return (
     <>
       <div>
         <div className="overflow-x-auto">
-          {selectedProduct == null && !isadd && (
+          {selectedIndustry == null && (
             <div class=" h-screen  w-full m-2">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div class="max-w-sm">
                   <div className="label">
-                    <span className="label-text text-sm">Search Product</span>
+                    <span className="label-text text-sm">Search Industry</span>
                   </div>
                   <div class="flex space-x-4">
                     <div class="flex rounded-md overflow-hidden w-full">
@@ -113,53 +102,53 @@ export default function Products() {
                         {column}
                       </th>
                     ))}
-                    <th>
-                      <button
-                        className="btn btn-ghost "
-                        onClick={() => addPro()}
-                      >
-                        Add Product
-                      </button>
-                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {/* row 1 */}
                   {isProfile &&
-                    products &&
-                    products.map(
+                    alldistributor.map(
                       (content, index) =>
                         (!issearch ||
                           (typeof Sdata === "string" &&
-                            content.product_name
+                            content.name
                               .toLowerCase()
                               .includes(Sdata.toLowerCase())) ||
                           !Sdata) && (
                           <tr>
                             <th>{index + 1}</th>
                             <td>
-                              <div className="flex items-center gap-3">
-                                <div>
-                                  <div className="font-bold">
-                                    {content.product_name}
-                                  </div>
-                                  <div className="text-sm opacity-50">
-                                    {content.distributor_name}
-                                  </div>
-                                </div>
-                              </div>
+                            <div className="flex items-center gap-3">
+                            <div>
+                                <div className="font-bold">
+                                {content.name}
+                            </div>
+                            </div>
+                            </div>
                             </td>
                             <td>
-                              {content.distributor_price}
-                              <br />
+                                {content.email}
+                                <br />
+                                <span className="badge badge-ghost badge-sm"></span>
                             </td>
-                            <td>{content.product_quantity}</td>
+                            <td>
+                                {content.phone_number}
+                                <br />
+                                <span className="badge badge-ghost badge-sm"></span>
+                            </td>
+                            <div className="flex items-center gap-3">
+                            <td>
+                                {content.region}
+                                <br />
+                                <span className="badge badge-ghost badge-sm"></span>
+                            </td>
+                            </div>
                             <th>
                               <button
                                 className="btn btn-ghost btn-xs"
                                 onClick={() => see(content)}
                               >
-                                Update
+                                RedList
                               </button>
                             </th>
                           </tr>
@@ -170,14 +159,9 @@ export default function Products() {
               </table>
             </div>
           )}
-          {selectedProduct && (
+          {selectedIndustry && (
             <div className="flex-grow bg-base-500 flex items-center justify-center mt-4 mb-4">
-              <EditProduct product={selectedProduct}></EditProduct>
-            </div>
-          )}
-          {isadd && (
-            <div className="flex-grow bg-base-500 flex items-center justify-center mt-4 mb-4">
-              <AddProduct></AddProduct>
+              <RedListtheDistributor Distributor={selectedIndustry}></RedListtheDistributor>
             </div>
           )}
         </div>

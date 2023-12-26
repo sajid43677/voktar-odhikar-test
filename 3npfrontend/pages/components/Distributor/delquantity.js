@@ -80,6 +80,7 @@ export default function Delquant() {
               <tbody>
                 {/* row 1 */}
                 {isProfile &&
+                  redlisted &&
                   redlisted.map((content, index) => (
                     <tr>
                       <th>{index + 1}</th>
