@@ -159,13 +159,13 @@ export class VerificationService {
 
   async checkVerificationDis(name): Promise<VerificationEntity> {
     console.log(name);
-    const dis = await this.profileService.getProfileByName(name)
-    console.log(dis);
+    const dis = await this.profileService.getProfileByName({name:name})
+    console.log("prover",dis);
    try{
     const profile = await this.verificationRepo.findOne({
       where: { license_number: dis.license_number},
     });
-    console.log(profile);
+    console.log("verilis",profile);
     return profile;
    }
    catch(error){

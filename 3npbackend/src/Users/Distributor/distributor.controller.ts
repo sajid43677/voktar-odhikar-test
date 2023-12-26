@@ -92,7 +92,7 @@ export class DistributorController {
   @UseGuards(SessionGuardDis)
   async checkDisVerification(@Session() session): Promise<VerificationEntity| { message: string }> { 
     const user = session.user;
-    console.log(user);
+    console.log("lisence",user);
     if(user.role==="Distributor")
     {
       
