@@ -2,10 +2,10 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useAuth } from "@/pages/utils/Distributor/authcontext";
+import { useAuth } from "./useauth";
 import EditProfile from "./editProfile";
 
-export default function Profile(props) {
+export default function MyProfile(props) {
   const [isProfile, setisProfile] = useState(false);
   const [Profile, setProfile] = useState();
   const { user, homego } = useAuth();
@@ -20,7 +20,7 @@ export default function Profile(props) {
     console.log(userData);
     try {
       const res = await axios.post(
-        process.env.NEXT_PUBLIC_API_End + "distributor/login/",
+        process.env.NEXT_PUBLIC_API_End + "industry/login/",
         userData,
         {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },

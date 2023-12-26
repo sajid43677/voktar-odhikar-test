@@ -1,9 +1,10 @@
+
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { useAuth } from "@/pages/utils/Distributor/authcontext";
+import { useAuth } from "./useauth";
 
 export default function EditProfile(props) {
   const router = useRouter();
@@ -41,7 +42,7 @@ export default function EditProfile(props) {
 
     try {
       const res = await axios.patch(
-        process.env.NEXT_PUBLIC_API_End + "distributor/updatedisprofile",
+        process.env.NEXT_PUBLIC_API_End + "industry/updateindprofile",
         userData,
         {
           headers: { "Content-Type": "application/json" },
@@ -50,7 +51,7 @@ export default function EditProfile(props) {
       );
       console.log(res);
       const ress = await axios.patch(
-        process.env.NEXT_PUBLIC_API_End + "distributor/updatedisregion",
+        process.env.NEXT_PUBLIC_API_End + "industry/updateindregion",
         regiondata,
         {
           headers: { "Content-Type": "application/json" },

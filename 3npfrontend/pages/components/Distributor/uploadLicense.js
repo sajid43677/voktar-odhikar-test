@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/pages/utils/authcontext";
+import { useAuth } from "@/pages/utils/Distributor/authcontext";
 import axios from "axios";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";

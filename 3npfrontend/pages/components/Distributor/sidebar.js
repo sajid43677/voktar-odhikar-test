@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import RedlistedInd from "./redlisted";
 import Delquant from "./delquantity";
-import { useAuth } from "@/pages/utils/authcontext";
+import { useAuth } from "@/pages/utils/Distributor/authcontext";
 import { useRouter } from "next/router";
 import ShowInd from "./allIndustry";
 import ShowDis from "./allDistributor";

@@ -3,14 +3,14 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { useAuth } from "@/pages/utils/Distributor/authcontext";
+import { useAuth } from "./useauth";
 
 export default function Login() {
   const router = useRouter();
   const form = useForm({
     defaultValues: {
-      Email: "asdas@gmail.com",
-      Password: "Sajid@259#",
+      Email: "bashar99@gmail.com",
+      Password: "1535k@Z!",
     },
 
     mode: "all",
@@ -29,7 +29,7 @@ export default function Login() {
 
     try {
       const res = await axios.post(
-        process.env.NEXT_PUBLIC_API_End + "distributor/login/",
+        process.env.NEXT_PUBLIC_API_End + "industry/login/",
         userData,
         {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -55,7 +55,7 @@ export default function Login() {
           document.cookie
         );
         router.push({
-          pathname: "../Distributor/distributor",
+          pathname: "../Industry/industry",
         }); // Replace "/dashboard" with the actual URL
       }
     } catch (error) {

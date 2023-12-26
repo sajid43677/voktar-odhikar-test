@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { useAuth } from "@/pages/utils/authcontext";
+import { useAuth } from "@/pages/utils/Distributor/authcontext";
 
 export default function AddProduct() {
   const router = useRouter();

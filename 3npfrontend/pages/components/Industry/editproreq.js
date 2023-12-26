@@ -3,16 +3,16 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { useAuth } from "@/pages/utils/Distributor/authcontext";
+import { useAuth } from "./useauth";
 
-export default function EditProduct(props) {
+export default function EditProReq(props) {
   console.log(props.product);
   const router = useRouter();
   const form = useForm({
     defaultValues: {
       product_name: props.product.product_name,
-      product_quantity: props.product.product_quantity,
-      product_price: props.product.distributor_price,
+      delivered_quantity: props.product.delivered_quantity,
+      requested_quantity: props.product.requested_quantity,
     },
 
     mode: "all",
@@ -25,23 +25,24 @@ export default function EditProduct(props) {
 
   const { login } = useAuth();
   const onSubmit = async (data) => {
-    const productQuan = {
+    const delQuan = {
       product_name: data.product_name,
-      product_quantity: parseInt(data.product_quantity, 10),
+      delivered_quantity: parseInt(data.delivered_quantity, 10),
     };
-    const productPrice = {
+    const reqQuan = {
       product_name: data.product_name,
-      distributor_price: parseInt(data.product_price, 10),
+      requested_quantity: parseInt(data.requested_quantity, 10),
     };
 
-    console.log(productPrice);
+    console.log(delQuan);
+    console.log(reqQuan);
 
     try {
       const res = await axios.patch(
-        process.env.NEXT_PUBLIC_API_End + "distributor/updateproductquantity",
-        productQuan,
+        process.env.NEXT_PUBLIC_API_End + "industry/updatereqproduct",
+        reqQuan,
         {
-          headers: { "Content-Type": "application/json" },
+       //   headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       );
@@ -68,10 +69,10 @@ export default function EditProduct(props) {
 
     try {
       const res = await axios.patch(
-        process.env.NEXT_PUBLIC_API_End + "distributor/updateproductprice",
-        productPrice,
+        process.env.NEXT_PUBLIC_API_End + "industry/updatedelproduct",
+        delQuan,
         {
-          headers: { "Content-Type": "application/json" },
+    //      headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       );
@@ -101,7 +102,7 @@ export default function EditProduct(props) {
     try {
       const res = await axios.delete(
         process.env.NEXT_PUBLIC_API_End +
-          `distributor/deletestockproduct?product_name=${props.product.product_name}`,
+          `industry/deletereq?product_name=${props.product.product_name}`,
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -110,7 +111,7 @@ export default function EditProduct(props) {
       console.log(res);
       if (res.status >= 200 && res.status < 300) {
         // Replace "/dashboard" with the actual URL
-        router.push("../Distributor/distributor");
+        router.push("../Industry/industry");
       }
     } catch (error) {
       console.log(error);
@@ -155,16 +156,16 @@ export default function EditProduct(props) {
             <div>
               <label className="form-control w-full max-w-xs">
                 <div className="label">
-                  <span className="label-text text-lg">Product Quantity</span>
+                  <span className="label-text text-lg">Requested Quantity</span>
                 </div>
                 <input
                   className={`input input-bordered w-full max-w-xs bg-inherit input-sm ${
-                    errors.product_quantity?.message ? "input-warning" : ""
+                    errors.requested_quantity?.message ? "input-warning" : ""
                   }`}
                   placeholder="Type here"
                   type="number"
                   id="product_quantity"
-                  {...register("product_quantity", {
+                  {...register("requested_quantity", {
                     validate: {
                       notEmpty: (fd) => {
                         return fd !== "" || "Field Cannot Be empty";
@@ -174,7 +175,7 @@ export default function EditProduct(props) {
                 />
                 <div className="label">
                   <span className="label-text-alt">
-                    {errors.product_quantity?.message}
+                    {errors.requested_quantity?.message}
                   </span>
                 </div>
               </label>
@@ -182,16 +183,16 @@ export default function EditProduct(props) {
             <div>
               <label className="form-control w-full max-w-xs">
                 <div className="label">
-                  <span className="label-text text-lg">Product Price</span>
+                  <span className="label-text text-lg">Delivered Quantity</span>
                 </div>
                 <input
                   className={`input input-bordered w-full max-w-xs bg-inherit input-sm ${
-                    errors.product_quantity?.message ? "input-warning" : ""
+                    errors.delivered_quantity?.message ? "input-warning" : ""
                   }`}
                   placeholder="Type here"
                   type="number"
-                  id="product_price"
-                  {...register("product_price", {
+                  id="delivered_quantity"
+                  {...register("delivered_quantity", {
                     validate: {
                       notEmpty: (fd) => {
                         return fd !== "" || "Field Cannot Be empty";
@@ -201,7 +202,7 @@ export default function EditProduct(props) {
                 />
                 <div className="label">
                   <span className="label-text-alt">
-                    {errors.product_price?.message || (isErr && errch)}
+                    {errors.delivered_quantity?.message || (isErr && errch)}
                   </span>
                 </div>
               </label>
@@ -211,7 +212,7 @@ export default function EditProduct(props) {
             </div>
             <div>
               {updated && (
-                <a className="text-sm  text-green-600">Product Updated</a>
+                <a className="text-sm  text-green-600">Product Data Updated</a>
               )}
             </div>
           </form>
@@ -221,7 +222,7 @@ export default function EditProduct(props) {
             className="btn btn-sm btn-outline btn-warning ml-50"
             onClick={dltProduct}
           >
-            Delete Product
+            Delete Request
           </button>
         </div>
       </div>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/pages/utils/Distributor/authcontext";
+import { useAuth } from "./useauth";
 import axios from "axios";
 import { useEffect } from "react";
-export default function DisNavbar() {
+
+export default function IndNavbar() {
   const router = useRouter();
   const [isVerified, setisVerified] = useState(false);
   const { logout, user, homego } = useAuth();
@@ -14,7 +15,7 @@ export default function DisNavbar() {
     }
     try {
       const res = await axios.get(
-        process.env.NEXT_PUBLIC_API_End + "distributor/checkDisVerification/",
+        process.env.NEXT_PUBLIC_API_End + "industry/checkIndVerification/",
         {
           withCredentials: true,
         }
