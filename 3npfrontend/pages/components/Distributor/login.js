@@ -55,7 +55,7 @@ export default function Login() {
           document.cookie
         );
         router.push({
-          pathname: "../Distributor/distributor",
+          pathname: "../Distributor/" + res.data.uid,
         }); // Replace "/dashboard" with the actual URL
       }
     } catch (error) {

@@ -160,7 +160,7 @@ export default function AddDelivary() {
                       },
                     })}
                   >
-                    <option disabled selected>
+                    <option value="Select Product" selected>
                       Select Product
                     </option>
 
@@ -201,11 +201,19 @@ export default function AddDelivary() {
                         quantity: (fd) => {
                           const currq = parseInt(fd, 10);
                           var maxq = 0;
+                          console.log(selectedProduct);
                           redlisted.forEach((product) => {
+                            console.log(product.product_name);
                             if (product.product_name === selectedProduct) {
+                              console.log(
+                                "207 ",
+                                product.product_name,
+                                product.product_quantity
+                              );
                               maxq = product.product_quantity;
                             }
                           });
+                          console.log(maxq, fd);
                           return fd <= maxq || "Quantity not available";
                         },
                       },
