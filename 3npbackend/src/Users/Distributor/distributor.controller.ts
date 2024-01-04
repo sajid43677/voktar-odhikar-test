@@ -29,7 +29,7 @@ import { ReportandNoticeService } from 'src/Models/Report and Notice/reportandno
 import { ReportandNoticeEntity } from 'src/Models/Report and Notice/reportandnotice.entity';
 import { DeleteResult } from 'typeorm';
 import { RedListEntity } from 'src/Models/Red Lists/redlist.entity';
-
+import puppeteer from 'puppeteer';
 
 @Controller("users/distributor")
 export class DistributorController {
@@ -918,6 +918,62 @@ async logout(@Session() session) {
     {
       return { message: 'You are a Unauthorized User' };
   
+    }
+  }
+
+  @Get('getChaldalDataVeg')
+  async getChaldalData() {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    try {
+       await page.goto('https://chaldal.com/fresh-vegetable');
+      // const [el] = await page.$x('//*[@id="page"]/div/div[5]/section/div/div/div/div/section/div[2]/div/div[1]/div/div/div[2]');
+      // const [el1] = await page.$x('//*[@id="page"]/div/div[5]/section/div/div/div/div/section/div[2]/div/div[1]/div/div/div[3]');
+      // const [el2] = await page.$x('//*[@id="page"]/div/div[5]/section/div/div/div/div/section/div[2]/div/div[1]/div/div/div[4]/span[2]');
+      // const [name, quantity, price] = await Promise.all([
+      //   el.getProperty('textContent').then(property => property.jsonValue()),
+      //   el1.getProperty('textContent').then(property => property.jsonValue()),
+      //   el2.getProperty('textContent').then(property => property.jsonValue())
+      // ]);
+      
+      // const data = {
+      //   name:name,
+      //   quantity:quantity,
+      //   price:price
+      // }
+      // console.log(data);
+        const items = await page.$$('[class^="product"]');
+    
+        const data = [];
+    
+          for (const item of items) {
+        const name = await item.$eval('[class^="name"]', element => element.textContent);
+        const quantity = await item.$eval('[class^="subText"]', element => element.textContent);
+        const price = await item.$eval('[class^="price"]', element => element.textContent);
+
+       const exists = data.some(product => (
+        product.name === name &&
+        product.quantity === quantity &&
+        product.price === price
+      ));
+
+      // If the item doesn't exist, push it to the data array
+      if (!exists) {
+        data.push({
+          name,
+          quantity,
+          price,
+        });
+      }
+    }
+    
+    
+
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error(error);
+      throw new Error('Internal Server Error');
     }
   }
   

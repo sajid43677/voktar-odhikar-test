@@ -4,14 +4,14 @@
     grid-gap: 16px; /* Adjust the gap between cards as needed */
   }
   
-  .card {
+  /* .card {
     border: 1px solid #ddd;
     padding: 16px;
     text-align: center;
     background-color: #f9f9f9;
-  }
+  } */
 
   .card:hover {
-    box-shadow: 0 0 10px rgba(255, 191, 0, 0.7); /* Green glow effect on hover */
-    background-color: #fbffaa;
+    box-shadow: 0 0 10px rgba(63, 61, 54, 0.7); /* Green glow effect on hover */
+    background-color: #083014;
   }

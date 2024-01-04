@@ -14,6 +14,7 @@ import ShowAdmin from "./allAdmin";
 import UploadLisence from "./uploadLicense";
 import ReportAdmin from "./report";
 import Dashboard from "./dashboard";
+import CurrentPrice from "./currentPrice";
 
 export default function Sidebar(props) {
   const [selectedIndex, setIndex] = useState(-1);
@@ -79,6 +80,7 @@ export default function Sidebar(props) {
           {selectedIndex === 4 && <UploadLisence />}
           {selectedIndex === 3 && <ReportAdmin />}
           {selectedIndex === 9 && <Dashboard />}
+          {selectedIndex === 10 && <CurrentPrice />}
         </div>
         <div className="drawer-side">
           <label
@@ -86,10 +88,7 @@ export default function Sidebar(props) {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul
-            style={{ height: "91vh" }}
-            className="menu p-4 w-80  bg-base-200 text-base-content"
-          >
+          <ul className="menu p-4 w-80  bg-base-200 text-base-content">
             {/* Sidebar content here */}
             {/* <li>
               <a>Sidebar Item 1</a>

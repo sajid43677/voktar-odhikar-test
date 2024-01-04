@@ -24,6 +24,7 @@ export default function Distributor() {
     "Admins",
     "profile",
     "Overview",
+    "Current Product Prices",
   ];
   const [alertVisible, setAlertVisible] = useState(true);
   const router = useRouter();
