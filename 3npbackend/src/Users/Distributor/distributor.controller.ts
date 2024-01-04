@@ -993,7 +993,7 @@ async logout(@Session() session) {
 
     
 
-      console.log(data);
+      
       return data;
     } catch (error) {
       console.error(error);
@@ -1181,7 +1181,7 @@ async logout(@Session() session) {
 
     
 
-      console.log(data);
+     
       return data;
     } catch (error) {
       console.error(error);
