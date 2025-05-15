@@ -34,8 +34,11 @@ export default function FishAndMeat() {
           className="card w-auto bg-base-300 shadow-xl animate-pulse"
         >
           <div className="card-body">
-            <div className="h-8 bg-gray-300 mb-4"></div>
-            <div className="h-4 bg-gray-300"></div>
+            <h2 className="card-title"></h2>
+            <div className="card-actions justify-end">
+              <div className="badge badge-outline"></div>
+              <div className="badge badge-outline"></div>
+            </div>
           </div>
         </div>
       ))}
