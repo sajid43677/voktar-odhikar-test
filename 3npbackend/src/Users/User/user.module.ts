@@ -20,6 +20,7 @@ import { RequestProEntity } from '../../Models/Request Amount/requestpro.entity'
 import { RequestProService } from '../../Models/Request Amount/reqproduct.service';
 
 import { UserController } from '../User/user.controller';
+import { CacheModule } from '@nestjs/cache-manager';
 
 
 

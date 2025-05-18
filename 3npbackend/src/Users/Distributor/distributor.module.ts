@@ -17,9 +17,11 @@ import { RedListService } from 'src/Models/Red Lists/redlist.service';
 import { ReportandNoticeService } from 'src/Models/Report and Notice/reportandnotice.service';
 import { RequestProService } from 'src/Models/Request Amount/reqproduct.service';
 import { VerificationService } from 'src/Models/Verification/verification.service';
+import { CacheModule } from '@nestjs/cache-manager';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ProfileEntity,VerificationEntity,RedListEntity,ReportandNoticeEntity,InProductEntity,DelquantityEntity
+  imports: [
+    TypeOrmModule.forFeature([ProfileEntity,VerificationEntity,RedListEntity,ReportandNoticeEntity,InProductEntity,DelquantityEntity
     ,DisProductEntity,RequestProEntity])],
   controllers: [DistributorController,],
   providers: [RedListService,ProfileService,VerificationService,RedListService,ReportandNoticeService,InProductService,DelquantityService,DisProductService,RequestProService],

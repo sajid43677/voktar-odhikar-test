@@ -19,11 +19,13 @@ import { DisProductEntity } from '../../Models/Distributor Product/disproduct.en
 import { DisProductService } from '../../Models/Distributor Product/disproduct.service';
 import { RequestProEntity } from '../../Models/Request Amount/requestpro.entity';
 import { RequestProService } from '../../Models/Request Amount/reqproduct.service';
+import { CacheModule } from '@nestjs/cache-manager';
 
 
 @Module({
   imports: 
-  [TypeOrmModule.forFeature([ProfileEntity,VerificationEntity,RedListEntity,ReportandNoticeEntity,InProductEntity,DelquantityEntity
+  [
+    TypeOrmModule.forFeature([ProfileEntity,VerificationEntity,RedListEntity,ReportandNoticeEntity,InProductEntity,DelquantityEntity
   ,DisProductEntity,RequestProEntity])],
   controllers: [AdminController, IndustryController],
   providers: [RedListService,ProfileService,VerificationService,RedListService,ReportandNoticeService,InProductService,DelquantityService,DisProductService,RequestProService],
